@@ -1,0 +1,3 @@
+source /remote/na1v2home/yenliang/Settings/gdb/kde-devel-gdb
+
+dir /remote/dept5242c/users/yenliang/dev/2011.06/src/HN:$cdir

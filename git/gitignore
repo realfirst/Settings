@@ -1,0 +1,19 @@
+
+#
+.DS_Store
+
+# android generated files
+build.xml
+gen
+bin
+obf
+local.properties
+
+# binary files
+*.class
+
+# eclipse
+.classpath
+.settings
+.project
+.gitignore

@@ -1,0 +1,163 @@
+#!/bin/tcsh
+
+# ######################################################################
+#
+#
+#
+# ######################################################################
+
+# ############################################################
+# Basic shell settings
+# ############################################################
+setenv PATH "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/usr/ccs/bin:/usr/ucb"
+setenv LD_LIBRARY_PATH "/usr/local/lib:/usr/lib:/lib"
+setenv MANPATH "/usr/local/man:/usr/man:/usr/share/man"
+setenv EXINIT   `set ai|set shiftwidth=3|set ic`
+setenv EDITOR   "vim"
+setenv LS_COLORS di="1;36":ln="1;35":ex="1;33":"*.ev=1;34":"*.cxx=1;34":"*.cpp=1;32":"*.c=1;32":"*.h=1;32":"*.vc=1;33":"*.txt=1;32":"*.tar=1;31":"*.gz=1;31":"*.bz2=1;31":"*.pdf=1;32"
+setenv SHELL tcsh
+
+# useful environment variables
+if ( ! $?USER ) then
+    setenv USER `whoami`
+endif
+if ( ! $?HOST ) then
+    setenv HOST `hostname`
+endif
+if ( ! $?DOMAIN ) then
+    setenv DOMAIN `domainname`
+endif
+
+setenv UNAME   `uname`
+
+# ############################################################
+# tcsh specific settings
+# ############################################################
+set autolist = ambiguous
+set notify
+set savehist = 2000
+set history = 2000
+set symlinks=ignore
+set rmstar
+set cdpath = ( $HOME )
+set prompt = "%{[0;32m%}%S%m%s%{[0m%}: %~ > "
+
+# ############################################################
+# Platform dependent settings.
+# ############################################################
+if ( $UNAME == SunOS ) then
+    setenv TERM dtterm
+    set path = ( /usr/openwin/bin/ /usr/dt/bin $path )
+
+else if ( $UNAME == Linux ) then
+    setenv TERM xterm-256color
+    set path = ( /usr/X11R6/bin $path )
+
+endif
+
+# ############################################################
+# Perfoce
+# ############################################################
+#StarRC Template:
+#HEAD:     rcxt_template_head
+#2011.06:  rcxt_template_2011.06
+#2010.12:  rcxt_template_2010.12
+setenv P4PORT   p4p-`/usr/local/bin/siteid`:1777
+setenv P4EDITOR "emacsclient -t -a ''"
+setenv P4CONFIG .p4config
+
+# ############################################################
+# StarRC developement environment
+# ############################################################
+alias cd2src       'cd /remote/dept5242c/users/${USER}/src'
+alias cd2src201106 'cd /remote/dept5242c/users/${USER}/src/2011.06'
+alias cd2srchead   'cd /remote/dept5242c/users/${USER}/src/head'
+alias cd2reg       'cd /remote/dept5242b/users/${USER}/regression'
+
+set QSC_VERSION = 'F'
+set path = ( /depot/qsc/QSC${QSC_VERSION}/bin /depot/local/bin $path )
+unset QSC_VERSION
+# alias purify /depot/qsc/QSCB/bin/purifys
+
+# ##################################################
+# XORELEASE: release version of StarRC
+# XOBRANCH : 0 for release and 1 for head
+# ##################################################
+setenv XORELEASE  2010.12
+setenv XOBRANCH   1
+setenv XOTESTHOME /remote/dept5242c/users/yenliang/xoTest/head/xoTest
+
+# if this shell is an interactive shell, make it dirty shell
+if ( $?SSH_TTY ) then
+    source $HOME/SOURCE_ME
+    setenv TARGET_ARCH `/depot/platforms/common/snps_arch/snps_arch -64`
+    echo "Override TARGET_ARCH = $TARGET_ARCH"
+
+    setenv STARRC_OA_LIBS /remote/dept5242a/users/ylchen/code/head_new3/oareader/lib-${TARGET_ARCH}:/global/libs/oa_qsce_2010.09_stlport4/${TARGET_ARCH}/lib/opt:/depot/gcc-4.2.0/lib64
+endif
+
+##### The following is to override the LICENSE setting in SOURCE_ME
+unsetenv SNPSLMD_LICENSE_FILE
+setenv   LM_LICENSE_FILE 26585@licsvr1:26585@licsvr2:26585@licsvr3:26585@us01_lic5:26585@us01_lic4:26585@us01_lic6:7588@sabor
+##:1726@minerva
+
+########## Setup Purify environment #####################
+setenv RSU_LICENSE_MAP /depot/pure/PurifyPlus_License_Map
+setenv RSU_TEMPLATE2_INI /depot/pure/templates2.ini
+setenv RATIONAL_LICENSE_FILE 27000@jeeva
+
+# ############################################################
+# Tools
+# ############################################################
+
+# ##################################################
+# Aliases
+# ##################################################
+alias ls         'ls --color=always'
+alias cls        'clear'
+alias ll         'ls -ls | more'
+alias lt         'ls -lt | more'
+alias la         'ls -al | more'
+alias num        'ls | wc -l'
+alias cwdcmd     'echo -n "]2;${HOST}:$cwd]1;${HOST}" '
+alias used       'du -sh'
+alias myps       'ps -aux | grep ${USER}'
+alias rm         'rm -i'
+alias gr         'grep -n'
+alias workspaces 'screen -mS work -DR'
+alias et         'emacsclient -t -a '\'''\'''
+alias g          'global'
+alias synmake-g  'synmake BUILD_TYPE=pure exec-g'
+alias cgrep      "find . -type f -iregex '.*\.\(c\|C\|h\|ht\|cpp\)' -print0 | xargs -0 grep --color -n"
+alias hgrep      "find . -type f -iregex '.*\.\(h\|ht\)' -print0 | xargs -0 grep --color -n"
+alias mgrep      "find . -regextype posix-egrep -iregex '(.*\/Makefile|.*\/Makefile\..*|.*\.make|.*\.mak|.*\.mk)' -type f -print0 | xargs -0 grep --color -n"
+alias sgrep      "find . -type f -iregex '.*\.\(c\|C\|h\|cpp\|S\|java\|xml\|sh\|hier\|make\)' -print0 | xargs -0 grep --color -n"
+# alias find-grep  "find . -type f -name '*!:1' -print 0 | xargs -0 grep --color -n \!:2"
+
+# create 5 dvtm
+foreach s ( 1 2 3 4 5)
+    alias dvtm$s "dtach -A /tmp/dvtm-session-$s dvtm"
+end
+alias dvtm       "dtach -A /tmp/dvtm-session dvtm"
+
+
+set GOOGLE_PERFTOOLS_DIR = /depot/google-perftools-1.5
+
+# ##################################################
+# Tools path and manual path
+# ##################################################
+set path = ( /depot/global-5.9.7/bin ~/tools/screen/Linux/bin \
+             ~/tools/emacs-23.3/bin /depot/emacs-23.1/bin \
+             /depot/valgrind-3.5.0/bin         \
+             /depot/git-1.7.0.5/bin                                  \
+             /depot/aspell-0.60.6/bin                                \
+             /depot/graphviz/bin                                     \
+             /depot/tools/ccollab/bin                                \
+             /depot/gdb-7.2/bin /depot/ddd-3.3.12                    \
+             $GOOGLE_PERFTOOLS_DIR/bin                               \
+             ~/tools/dvtm-0.6/bin                                    \
+             ~/local/bin ~/bin                                       \
+             /lsf/bin                                                \
+             $path )
+setenv LD_LIBRARY_PATH "$GOOGLE_PERFTOOLS_DIR/lib:$LD_LIBRARY_PATH"
+setenv MANPATH "/depot/global-5.9.7/share/man/:~/tools/screen/$UNAME/man:$MANPATH"

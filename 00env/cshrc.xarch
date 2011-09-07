@@ -1,0 +1,28 @@
+#!/bin/csh -f
+
+if ( $?LM_LICENSE_FILE ) then
+	if ( "$LM_LICENSE_FILE" !~ "*27002@com101*" ) then
+		setenv LM_LICENSE_FILE "27002@com101:$LM_LICENSE_FILE"
+	endif
+else
+	setenv LM_LICENSE_FILE 27002@com101
+endif	
+
+set XARCH_HOME_PATH = /proj/nsio/Xarch/xarch-623/
+set path = ( $XARCH_HOME_PATH/lnx86/bin \
+             $XARCH_HOME_PATH/lnx86/tools/xae/etc/pylib $path )
+
+if ( ! $?OA_ROOT ) then
+	source $HOME/00env/cshrc.oa
+endif
+setenv OA_HOME $OA_ROOT
+setenv OA_BIT 64
+setenv OA_MODE opt
+
+setenv LD_LIBRARY_PATH "$XARCH_HOME_PATH/lnx86/tools/lib/${OA_BIT}bit:${LD_LIBRARY_PATH}"
+
+alias who_use_x '/proj/nsio/Xarch/RE_XAE500_121906/XAE_Install/tools/bin/lmstat -c /proj/nsio/license/license.dat -f Encounter_X'
+
+# Cadence X
+# alias use_x 'source /proj/nsio/00env/cshrc.xarch'
+setenv CDS_AUTO_64BIT ALL

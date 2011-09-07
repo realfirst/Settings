@@ -1,0 +1,20 @@
+#!/bin/csh -f
+
+set ROOT = "/proj/nsio/tools"
+set COMPILER = gcc411
+set CURRENT  = current
+
+set BIN_PATH = ""
+foreach tool (binutils ddd gnuplot global graphviz tcltk subversion valgrind valkyrie gdb)
+    set BIN_PATH = "$ROOT/$tool/$CURRENT/bin:${BIN_PATH}"
+end
+if (`echo $PATH | grep "${BIN_PATH}"`x == x) then
+    setenv PATH "${BIN_PATH}:$PATH"
+    setenv LD_LIBRARY_PATH "$ROOT/tcltk/$CURRENT/lib:$LD_LIBRARY_PATH"
+    setenv MANPATH "$ROOT/tcl/$CURRENT/man:$ROOT/gcc/${CURRENT}_${COMPILER}/man:$ROOT/gdb/$CURRENT/man:$MANPATH"
+endif
+
+unset ROOT
+unset COMPILER
+unset CURRENT
+unset BIN_PATH

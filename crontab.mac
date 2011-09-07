@@ -1,0 +1,2 @@
+0 12 * * 1-5 /Users/yenliangl/Settings/backup.sh
+0 18 * * 1-5 /Users/yenliangl/Settings/backup.sh

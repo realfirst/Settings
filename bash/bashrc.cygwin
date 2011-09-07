@@ -1,0 +1,45 @@
+# -*- mode:shell-script -*-
+
+# ######################################################################
+# Settings for Windows/Cygwin
+# ######################################################################
+
+if [ $TERM == "emacs" ]; then
+    export PS1="\[\e[32m\][josh@altek]: \[\e[33m\]\w\[\e[0m\] $ ";
+else
+    #####
+    # Change ANSI blue a bit to make it readbale in a console.
+    ##
+    echo -e "\e]P44040FF"
+fi
+
+# ##################################################
+# Android development
+# ##################################################
+export ANDROID_SDK=$HOME/tools/android-sdk-windows
+export ANDROID_SRC=$HOME/projects/android/master/
+export PATH=$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools:$PATH
+
+#
+export CYGWIN="tty"
+# Cygwin/Emacs has problems of getting the local timezone.
+export TZ=Asia/Taipei
+# export TERM=xterm-256color
+
+# #########
+# Functions
+# #########
+
+# Some example functions
+# function settitle() { echo -ne "\e]2;$@\a\e]1;$@\a"; }
+
+export LC_CTYPE=zh_TW.UTF-8
+stty -ixon
+
+alias cls='clearw'
+
+# mimic the open command in MacOSX.
+alias open='cygstart'
+# alias emacs='runemacs.exe'
+
+export PATH="~/tools/screen/bin:$PATH:."

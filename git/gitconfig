@@ -1,0 +1,28 @@
+[color]
+	ui = auto
+	interactive = auto
+	status = auto
+	branch = auto
+	diff = auto
+[user]
+	name = Liu Yen-Liang (josh)
+	email = yenliangl@gmail.com
+[alias]
+	ci = commit
+	st = status
+	di = diff
+	co = checkout
+	staged = diff --cached
+	unstaged = diff
+	oneline = log --pretty=oneline
+	unstage = reset HEAD --
+	last = log -1 HEAD
+	br = branch
+[core]
+	excludesfile = /Users/yenliangl/.gitignore
+	quotepath = false
+[pager]
+	status = true
+	show-branch = true
+[log]
+	decorate = short

@@ -1,0 +1,26 @@
+#!/bin/csh -f
+
+# for OA
+if ( $?ASPIRIN_HOME_DIR ) then
+    setenv OA_ROOT $ASPIRIN_HOME_DIR/oa
+else
+    setenv OA_ROOT /proj/nsio/ASPIRIN_HOME_DIR/main/oa
+endif
+
+setenv OA_SYSNAME  "" # This is set by `sysname`. Don't use it!
+setenv OA_BIT      64
+setenv OA_COMPILER gcc411
+
+if ( `echo $PATH | grep ${OA_ROOT}/bin`x == x ) then
+	setenv PATH "${OA_ROOT}/bin:$PATH"
+endif
+
+setenv OA_MODE dbg
+if ( `echo $LD_LIBRARY_PATH | grep ${OA_ROOT}/bin/oaGetLibPath`x == x ) then
+	setenv LD_LIBRARY_PATH "`${OA_ROOT}/bin/oaGetLibPath`:${LD_LIBRARY_PATH}"
+endif
+
+setenv OA_MODE opt
+if ( `echo $LD_LIBRARY_PATH | grep ${OA_ROOT}/bin/oaGetLibPath`x == x ) then
+	setenv LD_LIBRARY_PATH "`${OA_ROOT}/bin/oaGetLibPath`:${LD_LIBRARY_PATH}"
+endif

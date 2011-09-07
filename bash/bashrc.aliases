@@ -1,0 +1,44 @@
+# -*- mode: shell-script; -*-
+
+function backup_work {
+    echo -n ">>> Check to see if both ~/Work and ~/Dropbox exist ... "
+    if [ ! -e ~/Work ] || [ ! -e ~/Dropbox ]; then
+       echo "FAILED"
+       return
+    fi
+    echo "OK"
+
+    cd ~/Work
+    BACKUP_FILE=work_backup.`date +%Y-%m-%d`
+    tar --exclude=data -jcv * | gpg --yes -eq -r yenliangl -o /tmp/$BACKUP_FILE
+    cp /tmp/$BACKUP_FILE ~/Dropbox
+    echo ">>> Encrypted backup file ~/Dropbox/$BACKUP_FILE created"
+}
+
+function restore_work {
+    echo -n "== Check to see if ~/Work exists... "
+    if [ ! -e ~/Work ]; then
+       echo "Nope! But I can create it for you."
+       mkdir ~/Work
+    fi
+    echo "OK"
+
+    # Get backup file from user
+    # todo: get latest one
+    read -p "Enter backup file: " backup_file
+
+    if [ ! -e ~/Dropbox/$backup_file ]; then
+       echo "ERROR: $backup_file doesn't exist. Fix it before going on."
+       return
+    fi
+
+    echo "Decrypt backup file: $backup_file"
+    gpg --yes -o /tmp/backup.tar.bz2 -d $backup_file
+    echo -n "Restoring files to ~/Work ... "
+    tar --keep-newer-files -C ~/Work -jxvpf /tmp/backup.tar.bz2
+    if [ ! -e ~/Work/Org/data ]; then
+        echo "Make link for ~/Work/Org/data..."
+        ln -s ~/Dropbox/Org/data ~/Work/Org/data
+    fi
+    echo "done"
+}

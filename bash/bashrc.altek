@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# altek settings
+export CVSROOT=":pserver:yenliangliu@192.168.23.133:/usr/local/cvsroot"
+
+function mount_leo21 {
+    hdiutil attach ~/projects/Altek/leo_21.dmg -mountpoint /Volumes/Leo21;
+    export ANDROID_PRODUCT_OUT='/Volumes/Leo21/eclair_21/out/target/product/smdk6410'
+    export PATH="/Volumes/Leo21/eclair_21/prebuilt/darwin-x86/toolchain/arm-eabi-4.4.0/bin:$PATH"
+    export BUILD_SYSTEM=/Volumes/Leo21/eclair_21/build/core
+    alias parse_stack='python ~/Dropbox/bin/stack.py --symbols-dir $ANDROID_PRODUCT_OUT/symbols'
+}
+
+function download_images {
+    scp yenliangliu@192.168.23.133:~/outdir/* .
+}

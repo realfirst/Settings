@@ -1,0 +1,24 @@
+#!/bin/csh
+
+setenv ASPIRIN_HOME_DIR /proj/nsio/ASPIRIN_HOME_DIR/$1
+
+# setenv ASPIRIN_NO_TAB_CONTROL
+setenv ASPIRIN_INTERNAL_USE 1
+# setenv ASPIRIN_TEST_DRIVER_TREE 1
+# setenv ASPIRIN_USE_DB_BROWSER   1
+
+set VERSION = 4.1.1
+set GCC = /proj/nsio/tools/gcc/$VERSION
+set BIN_PATH = "$ASPIRIN_HOME_DIR/bin"
+set LIB_PATH = "$GCC/lib64"
+
+if ( `echo $PATH | grep $BIN_PATH`x == x ) then
+    setenv PATH "${BIN_PATH}:$PATH"
+    setenv LD_LIBRARY_PATH "$GCC/lib64:$LD_LIBRARY_PATH"
+endif
+
+unset VERSION
+unset GCC
+unset BIN_PATH
+unset LIB_PATH
+

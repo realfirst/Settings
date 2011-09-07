@@ -1,0 +1,57 @@
+
+;; -*- mode: Lisp;-*-
+
+(load-file (expand-file-name "~/Settings/Emacs/emacs.el"))
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ecb-compile-window-width (quote edit-window))
+ '(ecb-options-version "2.40")
+ '(jde-jdk-registry (quote (("1.6.0" . "/System/Library/Frameworks/JavaVM.framework/Versions/1.6.0")))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+;; ----------------------------------------------------------------------
+;; Set English/Chinese font.
+;; ----------------------------------------------------------------------
+(setq ns-antialias-text nil)
+(when window-system
+  (progn
+    ;; (set-default-font "-apple-Monaco-medium-r-normal--12-*-*-*-*-*-*-*")
+    ;; (set-default-font "-apple-Menlo-medium-normal-normal-*-12-*-*-*-m-0-iso10646-1")
+    ;; (set-default-font "-apple-Anonymous_Pro-medium-r-normal--14-*-*-*-m-*-*-*")
+    ;; (set-default-font "-apple-BPmono-medium-normal-normal-*-13-*-*-*-m-0-iso10646-")
+    ;; (set-default-font "-apple-Cousine-medium-normal-normal-*-13-*-*-*-m-0-iso10646-1")
+    (set-default-font "-apple-Lucida_Sans_Typewriter-medium-normal-normal-*-13-*-*-*-m-0-iso10646-1")
+    ;; (set-default-font "-apple-Consolas-medium-normal-normal-*-14-*-*-*-*-*-*-*")
+    ;; (set-default-font "-apple-Inconsolata-medium-normal-normal-*-15-*-*-*-*-*-*-*")
+    ;; (set-default-font "-apple-Andale_Mono-medium-r-normal--11-90-72-72-m-90-mac-roman")
+
+    ;; Set chinese font.
+    (set-fontset-font (frame-parameter nil 'font)
+                      'han '("AR_PL_UMing_TW" . "unicode-bmp"))
+    ;; (set-fontset-font "fontset-default"
+    ;;                   'han '("MingLan" . "unicode-bmp"))
+    ))
+
+;; ----------------------------------------------------------------------
+;; MacOS-specific settings
+;; ----------------------------------------------------------------------
+(message "[MacOS] Loading MacOS-specific settings...")
+
+(setq shift-select-mode t
+      line-move-visual t
+      locate-command 'mdfind)
+
+(when window-system
+  (menu-bar-mode 1))
+
+(setenv "PATH" (concat (getenv "PATH")))
+(setq exec-path (append exec-path '("/usr/local/bin" )))

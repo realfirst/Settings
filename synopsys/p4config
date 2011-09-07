@@ -1,0 +1,4 @@
+# Template for P4 configuration of a local workspace.
+
+P4PORT=ida:1111
+P4CLIENT=yenliang-star-rc-2010.01

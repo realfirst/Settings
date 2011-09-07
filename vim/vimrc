@@ -1,0 +1,172 @@
+"----------------------------------------------------------
+" DOT VIMRC BY YENLIANG LIU
+"----------------------------------------------------------
+"----------------------------------------------------------
+" For terminals that only support 8 colors.
+"----------------------------------------------------------
+if !has("gui_running")
+  set t_Co=8
+  set t_Sf=[3%p1%dm
+  set t_Sb=[4%p1%dm
+endif
+if &term == "screen"
+	set t_kN=^[[6;*~
+	set t_kP=^[[5;*~
+endif
+
+set background=dark
+" highlighting only when terminal supports colors
+if &t_Co > 1
+    syntax enable
+endif
+hi Normal guifg=FloralWhite guibg=Black
+hi Type gui=bold
+hi Keyword gui=bold
+
+"----------------------------------------------------------
+" Turn on file type detection
+"----------------------------------------------------------
+filetype on
+
+"----------------------------------------------------------
+" Common vim settings
+"----------------------------------------------------------
+set ruler
+set backup
+
+" backup and patchmode
+set bdir=~/.autosave
+set backupext=.~
+" set patchmode=.orig
+
+set autowrite
+set autoread
+set shiftwidth=4
+set number
+set textwidth=80
+set showmatch
+set softtabstop=4
+set smarttab
+set autoindent
+set smartindent
+let c_space_errors = 1
+set showmatch
+set tabstop=4
+set noexpandtab
+set complete=.,w,b,u,t,i,k
+filetype indent on
+set cinoptions=:0,l1,g0,c2,(0
+set formatoptions=tqwnor
+
+"----------------------------------------------------------
+" Shell program
+"----------------------------------------------------------
+set shell=tcsh
+
+"----------------------------------------------------------
+" Search and Replace
+"----------------------------------------------------------
+set ignorecase
+set smartcase
+set incsearch
+set hls
+
+set backspace=2
+set nocp
+
+"----------------------------------------------------------
+" Printer options
+"----------------------------------------------------------
+set printoptions=paper:a4,duplex:short,number:y,syntax:a
+
+"----------------------------------------------------------
+" Key mappings
+"----------------------------------------------------------
+map <F1>   :h
+map <F2>   :w!<CR>
+map <F3>   :e
+map <F4>   :b
+map <F5>   :sp
+map <F6>   :vsplit
+map <F7>   <C-w>w
+map <F10>  :bd<CR>
+map <F12>  :q!<CR>
+
+nmap <C-W>e :new \| vimshell
+nmap <C-W>E :vnew \| vimshell bash<CR>
+
+nmap ,wc g<C-g>               ; "word count
+nmap ,tb :%s/\s\+$//<CR>      ; "trim blanks
+nmap ,so :so $HOME/.vimrc<CR> ; "source the .vimrc file
+
+nmap <C-J> <C-W>j<C-W>_        ; " easily switch windows
+nmap <C-K> <C-W>k<C-W>_        ; " easily switch windows
+
+"----------------------------------------------------------
+" Set GUI options.
+"----------------------------------------------------------
+set guioptions-=T
+" set guioptions-=m
+" set go+=b ; "Add scroll bar at the bottom of the window.
+
+" Deal with GUI stuff
+if has("gui_running")
+    " echo "yes, we have a gui"
+    if has("gui_gtk2")
+        " set guifont=MiscFixed\ 12
+        set guifont=Envy\ Code\ R\ 11
+    elseif has("x11")
+        " also for GTK 1
+        set guifont=9x15
+    elseif has("gui_win32")
+        " set guifont=Luxi_Mono:h12:cANSI
+    endif
+else
+    " echo "boring old console"
+endif
+
+" Switch between UNIX and Windows.
+set sessionoptions+=unix,slash
+set guifont=Menlo:h14
+set noanti "no antialiasing
+" set transparency=0 " no transparency
+" set macmeta
+colorscheme evening
+let g:explDetailedHelp=0
+let g:explHideFiles='^\.,\.gz$,\.exe$,\.zip$'
+
+" ---------------------------------------------------------
+" Taglist plugin
+" ---------------------------------------------------------
+"if version > 600
+"   so  $HOME/.vim/plugin/taglist.vim
+"    let Tlist_Ctags_Cmd='/depot/ctags-5.0.1/bin/ctags'
+    " Use <F6> to turn on/off the Tag list window or you can use vim +Tlist
+"    nnoremap <silent> <F6> :Tlist<CR>
+"    nnoremap <silent> <F7> :TlistShowPrototype<CR>
+    " Sync the tag in tag list window.
+"    nnoremap <silent> <F8> :TlistSync<CR>
+    " You can also use :TlistShowProrotype #lineNo to ask Tlist to display
+    " the prototype of the function at #lineNo
+    " :TlistShowPrototype
+"endif
+
+"let g:doxygen_enhanced_color=1
+"let g:doxygen_enhanced_colour=1
+"let g:load_doxygen_syntax=1
+
+
+" encoding
+set enc=utf8
+set fileencodings=utf-8,big5
+set encoding=utf8
+set tenc=utf8
+
+
+" ---------------------------------------------------------
+" source code directories
+"    use "gf" to find the file under the cursor
+" ---------------------------------------------------------
+set path+=~/projects/altek/clock/src/com/altek/android/clock,~/projects/altek/clock/src/com/altek/android/clock/app,~/projects/altek/clock/src/com/altek/android/clock/widget,~/projects/altek/clock/src/com/altek/android/clock/util,~/projects/altek/clock/src/com/altek/android/clock/preference
+
+source ~/scripts/kde-devel-vim.vim

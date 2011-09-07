@@ -1,0 +1,9 @@
+
+# Boost Test Library
+setenv BOOST_TEST_LOG_ALL       messages
+setenv BOOST_TEST_LOG_LEVEL     all
+setenv BOOST_TEST_REPORT_LEVEL  short
+setenv BOOST_TEST_SHOW_PROGRESS no
+setenv BOOST_TEST_BUILD_INFO    yes
+
+

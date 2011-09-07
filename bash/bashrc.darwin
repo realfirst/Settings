@@ -1,0 +1,61 @@
+# -*- mode: shell-script; -*-
+
+# ######################################################################
+# Settings for MacOSX
+# ######################################################################
+
+# ################################################
+# Bring Homwbrew binaries into alive
+# ################################################
+export PATH=/usr/local/bin:$PATH
+
+if [ -f /usr/local/Cellar/coreutils/8.12/aliases ]; then
+    . /usr/local/Cellar/coreutils/8.12/aliases
+fi
+
+export EDITOR="vim"
+
+# ################################################
+# Git
+# ################################################
+export GIT_EDITOR="vim"
+
+# ######################################################################
+# Some example functions
+# function settitle() { echo -ne "\e]2;$@\a\e]1;$@\a"; }
+# ######################################################################
+function find-all
+{
+    find . -type f -print0 | xargs -0 -grep --color -n -i "$@"
+}
+
+# ##############################################################################
+# Android
+# ##############################################################################
+export ANDROID_SDK="$HOME/tools/android-sdk-mac_x86"
+export ANDROID_NDK="$HOME/tools/android-ndk-r5b/toolchains/arm-linux-androideabi-4.4.3/prebuilt/darwin-x86/"
+export ANDROID_SRC=/Volumes/Android
+export PATH=$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools:$ANDROID_NDK/bin:$PATH
+
+function mount_android {
+    hdiutil attach ~/projects/android_master.dmg -mountpoint /Volumes/Android;
+    export ANDROID_PRODUCT_OUT=/Volumes/Android/out/target/product/generic
+    export BUILD_SYSTEM=/Volumes/Android/build/core
+    alias parse_stack='python ~/Dropbox/bin/stack.py --symbols-dir $ANDROID_PRODUCT_OUT/symbols'
+}
+
+alias myjdb='jdb -connect com.sun.jdi.SocketAttach:hostname=localhost,port=8700 -sourcepath "/Volumes/Leo21/eclair_21/packages/apps/Clock/src:/Volumes/Leo21/eclair_21/frameworks/altek/java:/Volumes/Leo21/eclair_21/frameworks/base/core/java:/Volumes/Leo21/eclair_21/frameworks/base/graphics/java:/Volumes/Leo21/eclair_21/packages/apps/Email/src"'
+
+# ##############################################################################
+# Alias definitions.
+# ##############################################################################
+alias tar='gtar'
+
+# ######################################################################
+# Populate PATH into MacOS app
+# ######################################################################
+#if [ -x /usr/libexec/path_helper ]; then
+#    eval `/usr/libexec/path_helper -s`
+#    defaults write $HOME/.MacOSX/environment PATH "$PATH"
+#fi
+#defaults write org.gnu.Emacs Emacs.font "-apple-Lucida_Sans_Typewriter-medium-normal-normal-*-13-*-*-*-m-0-iso10646-1"

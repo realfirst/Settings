@@ -1,0 +1,22 @@
+#!/bin/bash
+
+TEMPLATE=synergys_template.conf
+CONF_FILE=/tmp/synergys.conf
+
+SERVER=`hostname`
+CLIENT=yenliang_liu
+if [ x$1 == xaltek ]; then
+    CLIENT=yenliang_liu
+elif [ x$1 == xhome ]; then
+    CLIENT=desktop-tv
+fi
+
+COMMAND="sed -e 's/server_hostname/$SERVER/' -e 's/client_hostname/$CLIENT/' $TEMPLATE > $CONF_FILE"
+
+echo "Replacing hostname: $COMMAND"
+eval $COMMAND
+
+if [ -f $CONF_FILE ]; then
+    echo "Starting synergy server"
+    synergys -c $CONF_FILE
+fi

@@ -1,0 +1,31 @@
+#!/usr/bin/env tcsh
+
+set USE_TOOLS = "emacs w3m jdk gnupg global apache-ant freemind"
+set ROOT = ~/tools
+
+set BIN_PATH = ""
+foreach dir ( $USE_TOOLS )
+    if ( -d $ROOT/$dir/current/bin ) then
+        set BIN_PATH = "$ROOT/$dir/current/bin:${BIN_PATH}"
+    endif
+end
+
+if ( `echo $PATH | grep ${BIN_PATH}`x == x ) then
+    setenv PATH "${BIN_PATH}:$PATH"
+
+    foreach dir ( $USE_TOOLS )
+        if ( -d $dir/current/man ) then
+            setenv MANPATH "$ROOT/$dir/current/man:$MANPATH"
+        endif
+
+        if ( -d $dir/current/lib ) then
+            setenv LD_LIBRARY_PATH "$ROOT/$dir/current/lib:$LD_LIBRARY_PATH"
+        endif
+    end
+endif
+
+setenv PATH "$ROOT/android-sdk/current/tools:$ROOT/eclipse/current:$PATH"
+
+unset USE_TOOLS
+unset BIN_PATH
+unset ROOT

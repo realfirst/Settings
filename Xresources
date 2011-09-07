@@ -1,0 +1,44 @@
+
+XTerm*backarrowKeyIsErase: true
+         XTerm*foreground: White
+         XTerm*background: Black
+          XTerm*scrollBar: False
+          XTerm*saveLines: 2049
+        XTerm*cursorColor: Black
+        XTerm*colorBDMode: false
+        XTerm*cursorBlink: true
+          XTerm*colorMode: true
+           XTerm*boldMode: true
+	   XTerm*faceSize: 10
+	   XTerm*faceName: Lucida Console
+ XTerm*faceNameDoublesize: WenQuanYi Bitmap Song
+           XTerm*cjkWidth: true
+	XTerm*toolBar: false
+
+Emacs*font: xft:Lucida Console:size=10
+! Emacs.mode-line.attributeForeground: DarkSlateGrey
+! Emacs.mode-line.attributeBackground: Wheat
+! Emacs.minibuffer-prompt.atributeForeground: DarkSlateGrey
+! Emacs.minibuffer-prompt.atributeBackground: Wheat
+! Emacs.trailing-whitespace.attributeBackground: SeaGreen1
+
+         Emacs.foreground: #ffffff
+         Emacs.background: Black
+         Emacs.bitmapIcon: on
+            Emacs.menuBar: off
+            Emacs.toolBar: off
+        Emacs.borderColor: MidnightBlue
+        Emacs.borderWidth: 1
+        Emacs.cursorColor: Gold
+        Emacs.cursorBlink: off
+     Emacs.internalBorder: 1
+
+!                  Xft.dpi: 120
+!              Xft.hinting: 1
+!            Xft.hintstyle: hintmedium
+! Xft.lcdfilter: lcdlegacy
+
+       gnuplot*background: white
+
+URxvt*font: xft:Bitstream Vera Sans Mono:size=12
+Urxvt*boldFont: xft:Bitstream Vera Sans Mono:size=12:style=Bold

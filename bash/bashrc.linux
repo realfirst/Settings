@@ -1,0 +1,23 @@
+# -*- mode: shell-script; -*-
+
+# ######################################################################
+# Settings for Ubuntu/Linux
+# ######################################################################
+export ANDROID_SDK=$HOME/tools/android-sdk-linux_86
+export ANDROID_SRC=$HOME/projects/android/master/
+export PATH="$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools:$PATH"
+
+export GIT_EDITOR="emacsclient -t -a ''"
+
+# Workaround for being unable to ssh to GitHub. (Ubuntu's bug)
+unset SSH_AUTH_SOCK
+
+# for ant to build Android successfully
+# export TERM=xterm-256color
+# export TERM=xterm-16color
+export LC_CTYPE="zh_TW.utf8"
+
+# Create alias to mimic 'open' in MacOSX
+#alias open='xdg-open'
+alias open='gnome-open'
+#alias open='nautilus"
