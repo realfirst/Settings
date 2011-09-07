@@ -31,4 +31,4 @@
 ;; ----------------------------------------------------------------------
 ;; (setq kde-use-pc-select nil)            ;don't use pc-select
 (setq magic-keys-mode nil)
-(load-file (concat EMACS_HOME "kde-emacs.el"))
+(load-file (concat EMACS_HOME "/kde-emacs.el"))

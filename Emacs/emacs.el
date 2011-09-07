@@ -113,9 +113,9 @@
 ;; --------------------------------------------------
 ;; system-specific
 ;; --------------------------------------------------
-(defconst EMACS_HOME (expand-file-name "~/Settings/Emacs/"))
+(defconst EMACS_HOME (expand-file-name "~/Settings/Emacs"))
 (defconst DROPBOX (expand-file-name "~/Dropbox"))
-(defconst LISP_HOME (expand-file-name "~/Lisp/"))
+(defconst LISP_HOME (expand-file-name "~/Lisp"))
 
 (add-to-list 'load-path LISP_HOME)
 
@@ -124,9 +124,9 @@
     (setq system-name (car (split-string system-name "\\."))))
 
 ;; keep system- or user-specific customizations here
-(setq system-specific-config (concat EMACS_HOME system-name ".el")
-      user-specific-config (concat EMACS_HOME user-login-name ".el")
-      user-specific-dir (concat EMACS_HOME user-login-name))
+(setq system-specific-config (concat EMACS_HOME "/" system-name ".el")
+      user-specific-config (concat EMACS_HOME "/" user-login-name ".el")
+      user-specific-dir (concat EMACS_HOME "/" user-login-name))
 (add-to-list 'load-path user-specific-dir)
 
 (if (file-exists-p system-specific-config) (load system-specific-config))
@@ -134,13 +134,13 @@
 (if (file-exists-p user-specific-dir)
     (mapc #'load (directory-files user-specific-dir nil ".*el$")))
 
-(setq version-specific-config (concat EMACS_HOME (number-to-string emacs-major-version) ".el"))
+(setq version-specific-config (concat EMACS_HOME "/" (number-to-string emacs-major-version) ".el"))
 (if (file-exists-p version-specific-config) (load version-specific-config))
 
 ;; (defconst is-after-emacs-23  (<= 23 emacs-major-version))
 ;; (defconst is-after-emacs-24  (<= 24 emacs-major-version))
 
-(setq system-type-specific-config (concat EMACS_HOME (prin1-to-string system-type) ".el"))
+(setq system-type-specific-config (concat EMACS_HOME "/" (prin1-to-string system-type) ".el"))
 (if (file-exists-p system-type-specific-config) (load system-type-specific-config))
 
 ;; ----------------------------------------------------------------------
@@ -175,8 +175,8 @@
 ;; ----------------------------------------------------------------------
 ;; Doxygen mode load-path
 ;; ----------------------------------------------------------------------
-(add-to-list 'load-path (concat LISP_HOME "url"))
-(add-to-list 'load-path (concat LISP_HOME "doxymacs"))
+(add-to-list 'load-path (concat LISP_HOME "/url"))
+(add-to-list 'load-path (concat LISP_HOME "/doxymacs"))
 (require 'doxymacs)
 (dolist (hook (list 'c++-mode-hook
                     'java-mode-hook))
@@ -189,7 +189,7 @@
 ;; ----------------------------------------------------------------------
 ;; Emacs goodies
 ;; ----------------------------------------------------------------------
-(add-to-list 'load-path (concat LISP_HOME "emacs-goodies-el"))
+(add-to-list 'load-path (concat LISP_HOME "/emacs-goodies-el"))
 (require 'emacs-goodies-el)
 
 ;; --------------------------------------------------
@@ -452,7 +452,7 @@
     ;; --------------------------------------------------
     ;; Hideshow
     ;; --------------------------------------------------
-    (add-to-list 'load-path (concat LISP_HOME "elpa/hideshowvis-0.3"))
+    (add-to-list 'load-path (concat LISP_HOME "/elpa/hideshowvis-0.3"))
     (autoload 'hideshowvis-enable "hideshowvis" "Highlight foldable regions")
     (autoload 'hideshowvis-minor-mode
       "hideshowvis"
@@ -467,7 +467,7 @@
     ;; --------------------------------------------------
     ;; elscreen
     ;; --------------------------------------------------
-    (load-file (concat EMACS_HOME "elscreen.el"))
+    (load-file (concat EMACS_HOME "/elscreen.el"))
 
     ))
 (appt-activate t)

@@ -450,4 +450,3 @@ org-mode."
         (kill-buffer (current-buffer))
         (message "Plain text written to %s" offline)))))
 (ad-activate 'org-agenda-add-entry-to-org-agenda-diary-file)
-

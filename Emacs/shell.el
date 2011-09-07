@@ -102,7 +102,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;_+ Multi-term
 ;; load-path
-(add-to-list 'load-path (concat LISP_HOME "elpa/multi-term-0.8.8"))
+(add-to-list 'load-path (concat LISP_HOME "/elpa/multi-term-0.8.8"))
 (autoload 'multi-term "multi-term" nil t)
 (autoload 'multi-term-next "multi-term" nil t)
 (global-set-key (kbd "C-c t") 'multi-term-dedicated-open)
