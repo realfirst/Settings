@@ -43,8 +43,6 @@
 ;; (add-to-list load-path (concat LISP_HOME "/remember"))
 (add-to-list 'load-path (concat ORG_LISP_HOME "/lisp"))
 (add-to-list 'load-path (concat ORG_LISP_HOME "/contrib/lisp"))
-;; checklist
-(load (concat ORG_LISP_HOME "/contrib/lisp/org-checklist.el"))
 
 ;; ----------------------------------------------------------------------
 ;; Magit

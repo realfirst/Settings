@@ -106,7 +106,6 @@
 ;; --------------------------------------------------
 ;; handle trailing whitespaces
 ;; --------------------------------------------------
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
 (setq-default show-trailing-whitespace t)
 (setq default-indicate-empty-lines t)
 

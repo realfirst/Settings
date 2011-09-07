@@ -1,5 +1,6 @@
-
+(setq use-org-mode t)
 (load-file (expand-file-name "~/Settings/Emacs/emacs.el"))
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 (setq user-full-name "Liu Yen-Liang (Josh)")
 (setq user-mail-address "yenliangl@gmail.com")
