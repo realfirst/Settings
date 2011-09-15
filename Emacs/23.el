@@ -38,11 +38,13 @@
       htmlize-html-charset "utf-8"
       htmlize-convert-nonascii-to-entities nil)
 
-(defconst ORG_LISP_HOME (concat LISP_HOME "/org/org-7.7"))
+(setq ORG_LISP_HOME (concat LISP_HOME "/org/org-7.7"))
 
 ;; (add-to-list load-path (concat LISP_HOME "/remember"))
 (add-to-list 'load-path (concat ORG_LISP_HOME "/lisp"))
 (add-to-list 'load-path (concat ORG_LISP_HOME "/contrib/lisp"))
+;; checklist
+(load (concat ORG_LISP_HOME "/contrib/lisp/org-checklist.el"))
 
 ;; ----------------------------------------------------------------------
 ;; Magit

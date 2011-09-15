@@ -6,7 +6,7 @@
 ;; arguments, but requires 1".
 (setq byte-compile-warning nil)
 
-(load-file "~/Dropbox/Lisp/cedet/1.0/common/cedet.el")
+(load-file "~/Lisp/cedet/1.0/common/cedet.el")
 ;; Enable EDE (Project Management) features
 (global-ede-mode t)
 

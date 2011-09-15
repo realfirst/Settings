@@ -451,5 +451,3 @@ org-mode."
         (message "Plain text written to %s" offline)))))
 (ad-activate 'org-agenda-add-entry-to-org-agenda-diary-file)
 
-;; checklist
-(load (concat ORG_LISP_HOME "/contrib/lisp/org-checklist.el"))
