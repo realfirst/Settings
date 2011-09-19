@@ -1,8 +1,10 @@
 ;;
 ;; Load cygwin settings for windows-version of Emacs
 ;;
-(setenv "PATH" (concat "c:/cygwin/bin;" (getenv "PATH")))
-(setq exec-path (cons "c:/cygwin/bin/" exec-path))
+(when (file-directory-p "c:/cygwin/bin")
+  (progn 
+    (setenv "PATH" (concat "c:/cygwin/bin;" (getenv "PATH")))
+    (setq exec-path (cons "c:/cygwin/bin/" exec-path))))
 
 ;; LOGNAME and USER are expected in many Emacs packages
 ;; Check these environment variables.
@@ -81,3 +83,6 @@
 ;;
 ;; 
 (require 'cygwin-link)
+
+
+(setq-default ispell-program-name "aspell")
