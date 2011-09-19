@@ -26,7 +26,7 @@
             ;; flyspell mode
             (flyspell-mode 1)))
 
-(setq org-directory "~/Org")
+(setq org-directory (expand-file-name "~/Work/Org"))
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)

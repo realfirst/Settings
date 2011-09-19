@@ -112,9 +112,9 @@
 ;; --------------------------------------------------
 ;; system-specific
 ;; --------------------------------------------------
-(defconst EMACS_HOME (expand-file-name "~/Settings/Emacs"))
+(defconst EMACS_HOME (expand-file-name "~/Work/Settings/Emacs"))
 (defconst DROPBOX (expand-file-name "~/Dropbox"))
-(defconst LISP_HOME (expand-file-name "~/Lisp"))
+(defconst LISP_HOME (expand-file-name (concat DROPBOX "/Lisp")))
 
 (add-to-list 'load-path LISP_HOME)
 
@@ -143,7 +143,7 @@
 (if (file-exists-p system-type-specific-config) (load system-type-specific-config))
 
 ;; ----------------------------------------------------------------------
-;; Query and search
+;; Query and search EMACS_HOME
 ;; ----------------------------------------------------------------------
 (add-hook 'isearch-mode-hook
           ;; (function
