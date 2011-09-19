@@ -1,9 +1,8 @@
-
 ;; -*- mode: Lisp;-*-
 
 (setq use-org-mode t
       use-jdee t)
-(load-file (expand-file-name "~/Settings/Emacs/emacs.el"))
+(load-file (expand-file-name "~/Work/Settings/Emacs/emacs.el"))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
