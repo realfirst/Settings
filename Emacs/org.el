@@ -158,9 +158,10 @@
 ;; (define-key global-map "\C-cr" 'org-remember)
 
 (require 'org-protocol)
-(setq org-capture-templates `(("t" "Todo" entry (file+headline "~/Org/TASK.org" "Tasks") "* TODO %? %^g %u %i %a" :prepend t)
-                              ("n" "Note" entry (file+headline "~/Org/NOTE.org" "Notes") "* %^{Title}  %^g %? %u %i %a" :prepend t)
-                              ("w" "org-protocol" entry (file "~/Org/NOTE.org") "* TODO Review %c  :NEXT: %U :PROPERTIES: :Effort: 0:10 :END:" :immediate-finish t)))
+(setq org-capture-templates `(("t" "Todo" entry (file+headline (concat org-directory "/TASK.org") "Tasks") "* TODO %? %^g %u %i %a" :prepend t)
+                              ("n" "Note" entry (file+headline (concat org-directory "/NOTE.org") "Notes") "* %^{Title}  %^g %? %u %i %a" :prepend t)
+                              ("w" "org-protocol" entry (file (concat org-directory "/NOTE.org")) "* TODO Review %c  :NEXT: %U :PROPERTIES: :Effort: 0:10 :END:" :immediate-finish t)))
+
 (define-key global-map "\C-cc" 'org-capture)
 
 (setq org-log-into-drawer "LOGBOOK")
