@@ -129,7 +129,7 @@ attrcolor b ".I"
 # erase background with current bg color
 #defbce "on"
 #defmousetrack off
-term xterm-256color
+#term xterm-256color
 
 # ------------------------------------------------------------
 # Create 9 windows and switch to first window after intitialization
