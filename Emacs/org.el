@@ -329,7 +329,7 @@
 ;;           (lambda () (org-id-get-create))) ;; always add ID for a header section
 
 ;; attachments
-(setq org-attach-directory (expand-file-name "~/Org/data"))
+(setq org-attach-directory (expand-file-name (concat DROPBOX "/Data")))
 ;;
 ;; Attachment
 
@@ -412,7 +412,7 @@
          )))))
 
 
-(setq org-agenda-diary-file "~/Org/diary.org") ;; change this
+(setq org-agenda-diary-file (concat org-directory "/diary.org")) ;; change this
 
 (defadvice org-agenda-add-entry-to-org-agenda-diary-file
   (after add-to-google-calendar)
