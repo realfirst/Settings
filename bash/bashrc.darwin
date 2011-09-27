@@ -35,7 +35,7 @@ function find-all
 export ANDROID_SDK="$HOME/tools/android-sdk-mac_x86"
 export ANDROID_NDK="$HOME/tools/android-ndk-r5b/toolchains/arm-linux-androideabi-4.4.3/prebuilt/darwin-x86/"
 export ANDROID_SRC=/Volumes/Android
-export PATH=$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools:$ANDROID_NDK/bin:$PATH
+export PATH=$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools:$ANDROID_NDK/bin:~/tools/screen/bin:$PATH
 
 function mount_android {
     hdiutil attach ~/projects/android_master.dmg -mountpoint /Volumes/Android;

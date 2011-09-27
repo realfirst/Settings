@@ -3,7 +3,7 @@
 # ######################################################################
 # Settings for Ubuntu/Linux
 # ######################################################################
-export ANDROID_SDK=$HOME/tools/android-sdk-linux_86
+export ANDROID_SDK=$HOME/tools/android-sdk-linux_x86
 export ANDROID_SRC=$HOME/projects/android/master/
 export PATH="$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools:$PATH"
 

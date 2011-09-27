@@ -105,7 +105,7 @@ export PATH="$HOME/local/bin:$HOME/bin:$PATH"
 # ##################################################
 # Machine-dependent settings
 # ##################################################
-MNAME=`uname -o | tr '[:upper:]' '[:lower:]'`
+MNAME=`uname -s | tr '[:upper:]' '[:lower:]'`
 # MBASHRC=$HOME/Settings/bash/bashrc.${MNAME,,}
 MBASHRC=$HOME/Settings/bash/bashrc.$MNAME
 if [ -f $MBASHRC ]; then
@@ -132,10 +132,6 @@ alias cls='clear'
 alias et="emacsclient -t -a ''"
 alias ec="emacsclient -c -n -a ''"
 alias workspaces='screen -mS work -DR'
-
-# head version of screen that supports vertical split.
-alias screen='$HOME/tools/screen/bin/screen'
-
 alias scp='scp -Cr'
 
 # ##################################################
