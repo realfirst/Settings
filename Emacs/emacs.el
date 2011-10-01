@@ -112,7 +112,7 @@
 ;; --------------------------------------------------
 ;; system-specific
 ;; --------------------------------------------------
-(defconst EMACS_HOME (expand-file-name "~/Work/Settings/Emacs"))
+(defconst EMACS_HOME (expand-file-name "~/Settings/Emacs"))
 (defconst DROPBOX (expand-file-name "~/Dropbox"))
 (defconst LISP_HOME (expand-file-name (concat DROPBOX "/Lisp")))
 

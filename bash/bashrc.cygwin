@@ -18,7 +18,7 @@ fi
 # ##################################################
 export ANDROID_SDK=$HOME/tools/android-sdk-windows
 export ANDROID_SRC=$HOME/projects/android/master/
-export PATH=$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools:$PATH
+export PATH=$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools:/cygdrive/c/Java/jdk1.6.0_27/bin:~/tools/apache-ant-1.8.2/bin:$PATH
 
 #
 export CYGWIN="tty"

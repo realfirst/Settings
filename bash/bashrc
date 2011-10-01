@@ -99,15 +99,25 @@ export SHELL=/bin/bash
 export TERM=xterm-256color
 # export LC_CTYPE="zh_TW.utf8"
 export SCREENRC=$HOME/Settings/screen/screenrc
-
 export PATH="$HOME/local/bin:$HOME/bin:$PATH"
 
 # ##################################################
 # Machine-dependent settings
 # ##################################################
 MNAME=`uname -s | tr '[:upper:]' '[:lower:]'`
-# MBASHRC=$HOME/Settings/bash/bashrc.${MNAME,,}
-MBASHRC=$HOME/Settings/bash/bashrc.$MNAME
+case "$MNAME" in
+cygwin*)
+    MBASHRC=$HOME/Settings/bash/bashrc.cygwin
+    ;;
+darwin*)
+    MBASHRC=$HOME/Settings/bash/bashrc.darwin
+    ;;
+linux*)
+    MBASHRC=$HOME/Settings/bash/bashrc.linux
+    ;;
+*)
+    ;;
+esac
 if [ -f $MBASHRC ]; then
     echo "***>> Loading $MBASHRC"
     . $MBASHRC
