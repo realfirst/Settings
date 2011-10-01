@@ -47,3 +47,5 @@
 ;;       smtpmail-smtp-server "smtp.gmail.com"
 ;;       smtpmail-smtp-service 587
 ;;       smtpmail-debug-info t)
+
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
