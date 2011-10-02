@@ -48,4 +48,4 @@
 ;;       smtpmail-smtp-service 587
 ;;       smtpmail-debug-info t)
 
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
+;; (remove-hook 'before-save-hook 'delete-trailing-whitespace)
