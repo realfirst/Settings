@@ -2,7 +2,7 @@
 ;; Load cygwin settings for windows-version of Emacs
 ;;
 (when (file-directory-p "c:/cygwin/bin")
-  (progn 
+  (progn
     (setenv "PATH" (concat "c:/cygwin/bin;" (getenv "PATH")))
     (setq exec-path (cons "c:/cygwin/bin/" exec-path))))
 
@@ -81,8 +81,8 @@
 
 ;;
 ;;
-;; 
-(require 'cygwin-link)
+;;
+;; (require 'cygwin-link)
 
 
 (setq-default ispell-program-name "aspell")
