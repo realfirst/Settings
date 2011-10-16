@@ -30,19 +30,17 @@
 ;; ----------------------------------------------------------------------
 ;; Set English/Chinese font.
 ;; ----------------------------------------------------------------------
-(setq ns-antialias-text nil)
+(setq ns-antialias-text t)
 (when window-system
   (progn
-    (set-default-font "-apple-Ubuntu_Mono-medium-normal-normal-*-15-*-*-*-m-0-iso10646-1")
+    (set-default-font "-apple-Ubuntu_Mono-medium-normal-normal-*-14-*-*-*-m-0-iso10646-1")
     ;; (set-default-font "-apple-Monaco-medium-r-normal--12-*-*-*-*-*-*-*")
     ;; (set-default-font "-apple-Menlo-medium-normal-normal-*-12-*-*-*-m-0-iso10646-1")
     ;; (set-default-font "-apple-Anonymous_Pro-medium-r-normal--14-*-*-*-m-*-*-*")
-    ;; (set-default-font "-apple-BPmono-medium-normal-normal-*-13-*-*-*-m-0-iso10646-")
-    ;; (set-default-font "-apple-Cousine-medium-normal-normal-*-13-*-*-*-m-0-iso10646-1")
-    ;; (set-default-font "-apple-Lucida_Sans_Typewriter-medium-normal-normal-*-13-*-*-*-m-0-iso10646-1")
+    ;; (set-default-font "-apple-Lucida_Sans_Typewriter-medium-normal-normal-*-12-*-*-*-m-0-iso10646-1")
+    ;; (set-default-font "-apple-Lucida_Console-medium-normal-normal-*-13-*-*-*-m-0-iso10646-1")
     ;; (set-default-font "-apple-Consolas-medium-normal-normal-*-14-*-*-*-*-*-*-*")
-    ;; (set-default-font "-apple-Inconsolata-medium-normal-normal-*-14-*-*-*-*-*-*-*")
-    ;; (set-default-font "-apple-Andale_Mono-medium-r-normal--11-90-72-72-m-90-mac-roman")
+    ;; (set-default-font "-apple-Andale_Mono-medium-r-normal--12-90-72-72-m-90-mac-roman")
 
     ;; Set chinese font.
     (set-fontset-font (frame-parameter nil 'font)

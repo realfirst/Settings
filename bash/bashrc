@@ -164,3 +164,9 @@ alias ssh2opt08='ssh stxtopt08'
 alias ssh2opt09='ssh stxtopt09'
 alias ssh2opt10='ssh stxtopt10'
 alias ssh2opt11='ssh stxtopt11'
+
+alias cgrep="find . -type f -iregex '.*\.\(c\|C\|h\|ht\|cpp\)' -print0 | xargs -0 grep --color -n"
+alias hgrep="find . -type f -iregex '.*\.\(h\|ht\)' -print0 | xargs -0 grep --color -n"
+alias mgrep="find . -regextype posix-egrep -iregex '(.*\/Makefile|.*\/Makefile\..*|.*\.make|.*\.mak|.*\.mk)' -type f -print0 | xargs -0 grep --color -n"
+alias sgrep="find . -type f -iregex '.*\.\(c\|C\|h\|cpp\|S\|java\|xml\|sh\|hier\|make\)' -print0 | xargs -0 grep --color -n"
+alias jgrep="find . -type f -iregex '.*\.\(java\)' -print0 | xargs -0 grep --color -n"

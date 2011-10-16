@@ -11,7 +11,7 @@
 (add-hook 'eshell-preoutput-filter-functions 'ansi-color-filter-apply)
 
 (make-face 'my-shell-small-face)
-(set-face-attribute 'my-shell-small-face nil :height 0.9 :family "Andale_Mono")
+(set-face-attribute 'my-shell-small-face nil :height 0.9)
 (add-hook 'shell-mode-hook
           '(lambda ()
              (font-lock-mode t)
