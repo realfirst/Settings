@@ -4,7 +4,8 @@
 ;; (setq exec-path (append exec-path '("/usr/local/bin" )))
 
 (setq use-org-mode t
-      use-jdee t)
+      use-jdee t
+      use-tabbar t)
 (load-file (expand-file-name "~/Work/Settings/Emacs/emacs.el"))
 
 (custom-set-variables

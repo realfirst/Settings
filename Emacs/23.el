@@ -14,13 +14,13 @@
 ;;                          ("gnu" . "http://elpa.gnu.org/packages/")))
 
 (message ">>>>> [Emacs23] Loading color themes <<<<<")
-(defconst COLOR_THEME_LISP_HOME (concat LISP_HOME "/color-theme/6.6.0"))
+(defconst COLOR_THEME_LISP_HOME (concat ELPA_HOME "/color-theme-6.6.1"))
 
 (add-to-list 'load-path COLOR_THEME_LISP_HOME)
 (require 'color-theme)
 (load-file (concat COLOR_THEME_LISP_HOME "/themes/contrib/color-theme-tango-2.el"))
 (load-file (concat COLOR_THEME_LISP_HOME "/themes/contrib/color-theme-tangotango.el"))
-(load-file (concat LISP_HOME "/elpa/color-theme-twilight-0.1/color-theme-twilight.el"))
+(load-file (concat ELPA_HOME "/color-theme-twilight-0.1/color-theme-twilight.el"))
 (color-theme-initialize)
 (set-variable 'color-theme-is-global nil)
 (message "Setting favorite color theme")

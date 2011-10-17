@@ -117,7 +117,9 @@
 (unless (boundp 'EMACS_HOME)
 	(defconst EMACS_HOME (expand-file-name "~/Settings/Emacs")))
 (defconst DROPBOX (expand-file-name "~/Dropbox"))
-(defconst LISP_HOME (expand-file-name (concat DROPBOX "/Lisp")))
+(setq user-emacs-directory (concat DROPBOX "/.emacs.d"))
+(defconst LISP_HOME (concat user-emacs-directory "/elisp"))
+(defconst ELPA_HOME (concat user-emacs-directory "/elpa"))
 
 (add-to-list 'load-path LISP_HOME)
 
@@ -267,7 +269,9 @@
 ;; ----------------------------------------------------------------------
 ;; ECB
 ;; ----------------------------------------------------------------------
-;; (load-file (concat EMACS_HOME "/ecb.el"))
+(and (boundp 'use-ecb) use-ecb
+     (load-file (concat EMACS_HOME "/ecb.el"))
+     )
 
 ;; ----------------------------------------------------------------------
 ;; _+ Fontlock mode
@@ -479,4 +483,3 @@
 
     ))
 (appt-activate t)
-
