@@ -18,9 +18,8 @@
 
 (add-to-list 'load-path COLOR_THEME_LISP_HOME)
 (require 'color-theme)
-(load-file (concat COLOR_THEME_LISP_HOME "/themes/contrib/color-theme-tango-2.el"))
-(load-file (concat COLOR_THEME_LISP_HOME "/themes/contrib/color-theme-tangotango.el"))
 (load-file (concat ELPA_HOME "/color-theme-twilight-0.1/color-theme-twilight.el"))
+(load-file (concat ELPA_HOME "/color-theme-actress-0.1.0/color-theme-actress.el"))
 (color-theme-initialize)
 (set-variable 'color-theme-is-global nil)
 (message "Setting favorite color theme")
@@ -38,13 +37,13 @@
       htmlize-html-charset "utf-8"
       htmlize-convert-nonascii-to-entities nil)
 
-(setq ORG_LISP_HOME (concat LISP_HOME "/org/org-7.7"))
+(setq ORG_LISP_HOME (concat ELPA_HOME "/org-20111016"))
 
 ;; (add-to-list load-path (concat LISP_HOME "/remember"))
-(add-to-list 'load-path (concat ORG_LISP_HOME "/lisp"))
-(add-to-list 'load-path (concat ORG_LISP_HOME "/contrib/lisp"))
+;; (add-to-list 'load-path (concat ORG_LISP_HOME "/lisp"))
+;; (add-to-list 'load-path (concat ORG_LISP_HOME "/contrib/lisp"))
 ;; checklist
-(load (concat ORG_LISP_HOME "/contrib/lisp/org-checklist.el"))
+;; (load (concat ORG_LISP_HOME "/contrib/lisp/org-checklist.el"))
 
 ;; ----------------------------------------------------------------------
 ;; Magit
@@ -56,5 +55,14 @@
 ;;     P -> push
 ;;     f -> remote update   F -> pull
 ;; ----------------------------------------------------------------------
-(add-to-list 'load-path (concat LISP_HOME "/elpa/magit-1.0.0/"))
+(add-to-list 'load-path (concat ELPA_HOME "/elpa/magit-1.0.0/"))
 (require 'magit)
+
+;; Cygwin-mount
+(add-to-list 'load-path (concat ELPA_HOME "/cygwin-mount-2001"))
+
+;; multi-term
+(add-to-list 'load-path (concat ELPA_HOME "/multi-term-0.8.8"))
+
+;; tabbar
+(add-to-list 'load-path (concat ELPA_HOME "/tabbar-2.0.1"))
