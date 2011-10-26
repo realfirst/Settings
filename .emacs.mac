@@ -63,3 +63,4 @@
   (menu-bar-mode 1))
 
 ;; (remove-hook 'before-save-hook 'delete-trailing-whitespace)
+(global-set-key [home] 'beginning-of-line)
