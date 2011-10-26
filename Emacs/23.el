@@ -18,9 +18,9 @@
 
 (add-to-list 'load-path COLOR_THEME_LISP_HOME)
 (require 'color-theme)
-(load-file (concat ELPA_HOME "/color-theme-twilight-0.1/color-theme-twilight.el"))
+;; (load-file (concat ELPA_HOME "/color-theme-twilight-0.1/color-theme-twilight.el"))
 (load-file (concat ELPA_HOME "/color-theme-actress-0.1.0/color-theme-actress.el"))
-(color-theme-initialize)
+;(color-theme-initialize)
 (set-variable 'color-theme-is-global nil)
 (message "Setting favorite color theme")
 ;; (add-hook 'after-make-window-system-frame-hooks 'color-theme-midlight)
