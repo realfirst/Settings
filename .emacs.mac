@@ -44,10 +44,10 @@
     ;; (set-default-font "-apple-Andale_Mono-medium-r-normal--12-90-72-72-m-90-mac-roman")
 
     ;; Set chinese font.
-    (set-fontset-font (frame-parameter nil 'font)
-                      'han '("AR_PL_UMing_TW" . "unicode-bmp"))
-    ;; (set-fontset-font "fontset-default"
-    ;;                   'han '("MingLan" . "unicode-bmp"))
+    ;; (set-fontset-font (frame-parameter nil 'font)
+    ;;                   'han '("AR_PL_UMing_TW" . "unicode-bmp"))
+    (set-fontset-font "fontset-default"
+                      'han '("MingLan" . "unicode-bmp"))
     ))
 
 ;; ----------------------------------------------------------------------
