@@ -19,6 +19,5 @@
 (add-hook 'after-make-window-system-frame-hooks
           (lambda ()
             ;; (load-theme 'tsdh-dark)))
-            (load-theme 'tango-dark)))
-            ;; (load-theme 'zenburn)))
-            ;; (load-theme 'wombat)))
+            ;; (load-theme 'tango-dark)))
+            (load-theme 'wombat)))
