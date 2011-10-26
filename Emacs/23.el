@@ -1,17 +1,6 @@
 ;; ------------------------------------------------------------
 ;; Stuff that is specific for Emacs 23
 ;; ------------------------------------------------------------
-;;; This was installed by package-install.el.
-;;; This provides support for the package system and
-;;; interfacing with ELPA, the package archive.
-;;; Move this code earlier if you want to reference
-;;; packages in your .emacs.
-;; (when
-;;     (load
-;;      (expand-file-name "~/.emacs.d/elpa/package.el"))
-;;   (package-initialize))
-;; (setq package-archives '(("ELPA" . "http://tromey.com/elpa/")
-;;                          ("gnu" . "http://elpa.gnu.org/packages/")))
 
 (message ">>>>> [Emacs23] Loading color themes <<<<<")
 (defconst COLOR_THEME_LISP_HOME (concat ELPA_HOME "/color-theme-6.6.1"))
@@ -56,7 +45,6 @@
 ;;     f -> remote update   F -> pull
 ;; ----------------------------------------------------------------------
 (add-to-list 'load-path (concat ELPA_HOME "/elpa/magit-1.0.0/"))
-(require 'magit)
 
 ;; Cygwin-mount
 (add-to-list 'load-path (concat ELPA_HOME "/cygwin-mount-2001"))
