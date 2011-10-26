@@ -1,21 +1,56 @@
 #!/bin/tcsh
 
-# ######################################################################
-#
-#
-#
-# ######################################################################
-
 # ############################################################
 # Basic shell settings
 # ############################################################
 setenv PATH "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/usr/ccs/bin:/usr/ucb"
 setenv LD_LIBRARY_PATH "/usr/local/lib:/usr/lib:/lib"
 setenv MANPATH "/usr/local/man:/usr/man:/usr/share/man"
+
+# Don't overwrite existing files with the redirection character ">"
+set noclobber
+
+# Check to see if this is an interactive shell. If not, skip the rest of this
+# file. Good for running shell commands in Emacs or scp.
+if ($?USER == 0 || $?prompt == 0) exit
+
 setenv EXINIT   `set ai|set shiftwidth=3|set ic`
 setenv EDITOR   "vim"
 setenv LS_COLORS di="1;36":ln="1;35":ex="1;33":"*.ev=1;34":"*.cxx=1;34":"*.cpp=1;32":"*.c=1;32":"*.h=1;32":"*.vc=1;33":"*.txt=1;32":"*.tar=1;31":"*.gz=1;31":"*.bz2=1;31":"*.pdf=1;32"
 setenv SHELL tcsh
+
+set autolist = ambiguous
+
+# Notify me when the status of background jobs change
+set notify
+
+# Save the most recent 40 events when I log out
+set savehist = 2000
+
+# Remember my 40 most recent events
+set history = 2000
+
+# Substitute the filename to be completed when I type an <ESC> at
+# the command line
+set filec
+
+# Tells the shell to ignore .o files when trying to complete filenames
+# when filec is set.  (This doesn't hold if the .o file is the only
+# on that could be completed.
+set fignore=.o
+
+# Tells "filec" not to cry if it can't complete a file.
+set nobeep
+
+# Don't let me log out by pressing <ctrl-d>
+set ignoreeof
+
+# Set TTY shell variable equal to the current terminal name
+set TTY=`who am i | awk '{print $2}'`
+
+set symlinks=ignore
+set rmstar
+set cdpath = ( $HOME )
 
 # useful environment variables
 if ( ! $?USER ) then
@@ -30,30 +65,69 @@ endif
 
 setenv UNAME   `uname`
 
-# ############################################################
-# tcsh specific settings
-# ############################################################
-set autolist = ambiguous
-set notify
-set savehist = 2000
-set history = 2000
-set symlinks=ignore
-set rmstar
-set cdpath = ( $HOME )
-set prompt = "%{[0;32m%}%S%m%s%{[0m%}: %~ > "
+if ( $?EMACS ) then
+    set prompt = "%S%m%s: %~ > "
+    unsetenv LS_COLORS
+else
+    set prompt = "%{[0;32m%}%S%m%s%{[0m%}: %~ > "
+endif
 
 # ############################################################
 # Platform dependent settings.
 # ############################################################
-if ( $UNAME == SunOS ) then
-    setenv TERM dtterm
-    set path = ( /usr/openwin/bin/ /usr/dt/bin $path )
+set QSC_VERSION = 'F'
+set path = ( /depot/qsc/QSC${QSC_VERSION}/bin /depot/local/bin /depot/platforms/common/p4_utilities ~/ENV_SETUP $path )
+unset QSC_VERSION
+# alias purify /depot/qsc/QSCB/bin/purifys
 
-else if ( $UNAME == Linux ) then
-    setenv TERM xterm-256color
-    set path = ( /usr/X11R6/bin $path )
+setenv PPDTYPE `GetENV PPDTYPE`
+setenv SNPSTYPE `GetENV SNPSTYPE`
+
+# ############################################################
+# Programs that are built for amd64 and sparc64
+# ############################################################
+if ( x$SNPSTYPE == xsparc64 ) then
+  setenv TERM dtterm
+  set path = ( /depot/SUNWspro-SS12.2/solstudio12.2/bin /depot/SUNWspro-SS12/SUNWspro/bin /opt/csw/bin /usr/openwin/bin/ /usr/dt/bin $path )
+  setenv LD_LIBRARY_PATH "/depot/SUNWspro-SS12.2/solstudio12.2/lib:/depot/SUNWspro-SS12/SUNWspro/lib:/usr/openwin/lib:/usr/openwin/lib/64:$LD_LIBRARY_PATH"
+
+  alias rsh2rc01 'rsh starrc01'
+
+else if ( x$SNPSTYPE == xamd64 ) then
+  setenv TERM xterm-256color
+  setenv TERM xterm-color
+  setenv TERM xterm
+
+  # --------------------------------------------------
+  # Tools for linux platform
+  # --------------------------------------------------
+  set GOOGLE_PERFTOOLS_DIR = /depot/google-perftools-1.5
+
+  set path = ( /depot/global-5.9.7/bin /depot/binutils-2.18/bin  \
+               ~/tools/screen/$SNPSTYPE/bin ~/tools/dvtm-0.6/bin \
+               ~/tools/emacs-23.3/bin \
+               ~/tools/tmux-1.5/bin \
+               /depot/valgrind-3.5.0/bin \
+               /depot/git-1.7.0.5/bin \
+               /depot/aspell-0.60.6/bin \
+               /depot/graphviz/bin \
+               /depot/tools/ccollab/bin \
+               /depot/gdb-7.2/bin /depot/ddd-3.3.12                    \
+               /depot/autoconf-2.59/bin /depot/automake-1.9.6/bin   \
+               $GOOGLE_PERFTOOLS_DIR/bin                              \
+               /lsf/bin                                                \
+               $path )
+  setenv LD_LIBRARY_PATH $GOOGLE_PERFTOOLS_DIR/lib:/remote/dept5242c/users/yenliang/local/lib:/depot/qt-x11-opensource-src-4.3.5/lib:/usr/local/lib:/usr/X11R6/lib64:/usr/X11R6/lib:/usr/lib64:/usr/lib:$LD_LIBRARY_PATH
+  setenv MANPATH /depot/global-5.9.7/share/man/:$MANPATH
+
+  # create 9 aliases to create 9 dvtm sessions
+  foreach s ( 1 2 3 4 5 6 7 8 9 )
+    alias dvtm$s "dtach -A /tmp/dvtm-session-$s dvtm"
+  end
+  alias dvtm     "dtach -A /tmp/dvtm-session dvtm"
 
 endif
+setenv TARGET_ARCH $SNPSTYPE
 
 # ############################################################
 # Perfoce
@@ -65,41 +139,59 @@ endif
 setenv P4PORT   p4p-`/usr/local/bin/siteid`:1777
 setenv P4EDITOR "emacsclient -t -a ''"
 setenv P4CONFIG .p4config
+setenv P4MERGE emerge
+setenv MERGE emerge
 
 # ############################################################
 # StarRC developement environment
 # ############################################################
+limit coredumpsize unlimited
+
 alias cd2src       'cd /remote/dept5242c/users/${USER}/src'
 alias cd2src201106 'cd /remote/dept5242c/users/${USER}/src/2011.06'
 alias cd2srchead   'cd /remote/dept5242c/users/${USER}/src/head'
-alias cd2reg       'cd /remote/dept5242b/users/${USER}/regression'
+alias cd2qa        'cd /remote/dept5242h/users/${USER}/regression'
+alias cd2case      'cd /remote/dept5242c/users/${USER}/testcase'
 
-set QSC_VERSION = 'F'
-set path = ( /depot/qsc/QSC${QSC_VERSION}/bin /depot/local/bin $path )
-unset QSC_VERSION
-# alias purify /depot/qsc/QSCB/bin/purifys
-
+# dept5242b is for PCA test now
 # ##################################################
-# XORELEASE: release version of StarRC
-# XOBRANCH : 0 for release and 1 for head
+# Setup xoTest
 # ##################################################
-setenv XORELEASE  2010.12
+setenv XORELEASE 2011.12
+# 0: for release, 1: for HEAD branch
 setenv XOBRANCH   1
-setenv XOTESTHOME /remote/dept5242c/users/yenliang/xoTest/head/xoTest
+
+# If you don't check out your own version of xoTest, just use central.
+#    /remote/na4apd/starrc/group/pv/for_regression/${XORELEASE}.${XOBRANCH}/xoTest
+#
+# or just uncomment the following lines. It will be set this default location by
+# SOURCE_ME
+setenv XOTESTHOME /remote/dept5242c/users/yenliang/src/xoTest/xoTest
 
 # if this shell is an interactive shell, make it dirty shell
-if ( $?SSH_TTY ) then
-    source $HOME/SOURCE_ME
-    setenv TARGET_ARCH `/depot/platforms/common/snps_arch/snps_arch -64`
-    echo "Override TARGET_ARCH = $TARGET_ARCH"
-
-    setenv STARRC_OA_LIBS /remote/dept5242a/users/ylchen/code/head_new3/oareader/lib-${TARGET_ARCH}:/global/libs/oa_qsce_2010.09_stlport4/${TARGET_ARCH}/lib/opt:/depot/gcc-4.2.0/lib64
-endif
+#if ( $?SSH_TTY ) then 
+    setenv TARGET_ARCH $SNPSTYPE
+    source ~/SOURCE_ME
+    setenv STARRC_OA_LIBS /remote/dept5242a/users/ylchen/code/head_new3/oareader/lib-${SNPSTYPE}:/global/libs/oa_qsce_2010.09_stlport4/${SNPSTYPE}/lib/opt:/depot/gcc-4.2.0/lib64
+#endif
 
 ##### The following is to override the LICENSE setting in SOURCE_ME
 unsetenv SNPSLMD_LICENSE_FILE
-setenv   LM_LICENSE_FILE 26585@licsvr1:26585@licsvr2:26585@licsvr3:26585@us01_lic5:26585@us01_lic4:26585@us01_lic6:7588@sabor
+setenv LM_LICENSE_FILE 26585@us01_lic6:26585@us01_lic5:26585@us01_lic4:26585@us01_lic3:26585@us01_lic2
+#setenv LM_LICENSE_FILE 26585@licsvr1:26585@licsvr2:26585@licsvr3:26585@us01_lic5:26585@us01_lic4:26585@us01_lic6:7588@sabor
 ##:1726@minerva
+
+# ##################################################
+# Unit Test
+# ##################################################
+# don't delete the run directory: hdl_tmp
+setenv TEST_DONT_DELETE 1
+setenv STARRC_REG_ROOT /remote/dept5242c/users/yenliang/src/head
+setenv REGRESSO_BASE $STARRC_REG_ROOT
+setenv REGRESSO_ROOT unit
+setenv SYNOPSYS $STARRC_REG_ROOT
+alias unit 'test_make -e /bin/csh'
+alias unitall 'test_make -e /bin/csh $REGRESSO_BASE/$REGRESSO_ROOT'
 
 ########## Setup Purify environment #####################
 setenv RSU_LICENSE_MAP /depot/pure/PurifyPlus_License_Map
@@ -109,6 +201,17 @@ setenv RATIONAL_LICENSE_FILE 27000@jeeva
 # ############################################################
 # Tools
 # ############################################################
+set my_tools_path = /remote/dept5242c/users/yenliang/tools
+setenv LD_LIBRARY_PATH "$my_tools_path/ncurses-5.9/$SNPSTYPE/lib:$LD_LIBRARY_PATH"
+setenv ICWB_HOME_DIR /global/apps/icwb_plus_2010.06-9
+set path = ( \
+    # EDA tools \
+    /remote/srm509/clientstore/f2011.09_icc_sp/object_root/bin-${SNPSTYPE} \
+    /global/apps3/mw_2010.12-SP5/bin/$PPDTYPE/Milkyway \
+    $ICWB_HOME_DIR/bin \
+    # Other tools \
+    $my_tools_path/ncurses-5.9/$SNPSTYPE/bin \
+    $path )
 
 # ##################################################
 # Aliases
@@ -119,45 +222,36 @@ alias ll         'ls -ls | more'
 alias lt         'ls -lt | more'
 alias la         'ls -al | more'
 alias num        'ls | wc -l'
-alias cwdcmd     'echo -n "]2;${HOST}:$cwd]1;${HOST}" '
+# alias cwdcmd     'echo -n "]2;${HOST}:$cwd]1;${HOST}" '
 alias used       'du -sh'
 alias myps       'ps -aux | grep ${USER}'
 alias rm         'rm -i'
 alias gr         'grep -n'
-alias workspaces 'screen -mS work -DR'
+alias ws         'screen -DR -mS'
+alias workspace  'screen -mS work -DR'
 alias et         'emacsclient -t -a '\'''\'''
-alias g          'global'
+alias ec         'emacsclient -c -a '\'''\'''
 alias synmake-g  'synmake BUILD_TYPE=pure exec-g'
 alias cgrep      "find . -type f -iregex '.*\.\(c\|C\|h\|ht\|cpp\)' -print0 | xargs -0 grep --color -n"
 alias hgrep      "find . -type f -iregex '.*\.\(h\|ht\)' -print0 | xargs -0 grep --color -n"
-alias mgrep      "find . -regextype posix-egrep -iregex '(.*\/Makefile|.*\/Makefile\..*|.*\.make|.*\.mak|.*\.mk)' -type f -print0 | xargs -0 grep --color -n"
+alias mgrep      "find . -regextype posix-egrep -iregex '(.*\/Makefile|.*\/Makefile\..*|.*\.make|.*\.hier|.*\.mak|.*\.mk)' -type f -print0 | xargs -0 grep --color -n"
 alias sgrep      "find . -type f -iregex '.*\.\(c\|C\|h\|cpp\|S\|java\|xml\|sh\|hier\|make\)' -print0 | xargs -0 grep --color -n"
-# alias find-grep  "find . -type f -name '*!:1' -print 0 | xargs -0 grep --color -n \!:2"
+alias fast       "/remote/srm226/sde/fast/test/0.1/bin/fast"
 
-# create 5 dvtm
-foreach s ( 1 2 3 4 5)
-    alias dvtm$s "dtach -A /tmp/dvtm-session-$s dvtm"
-end
-alias dvtm       "dtach -A /tmp/dvtm-session dvtm"
-
-
-set GOOGLE_PERFTOOLS_DIR = /depot/google-perftools-1.5
 
 # ##################################################
-# Tools path and manual path
+# Aliases for projects I'm working on.
 # ##################################################
-set path = ( /depot/global-5.9.7/bin ~/tools/screen/Linux/bin \
-             ~/tools/emacs-23.3/bin /depot/emacs-23.1/bin \
-             /depot/valgrind-3.5.0/bin         \
-             /depot/git-1.7.0.5/bin                                  \
-             /depot/aspell-0.60.6/bin                                \
-             /depot/graphviz/bin                                     \
-             /depot/tools/ccollab/bin                                \
-             /depot/gdb-7.2/bin /depot/ddd-3.3.12                    \
-             $GOOGLE_PERFTOOLS_DIR/bin                               \
-             ~/tools/dvtm-0.6/bin                                    \
-             ~/local/bin ~/bin                                       \
-             /lsf/bin                                                \
-             $path )
-setenv LD_LIBRARY_PATH "$GOOGLE_PERFTOOLS_DIR/lib:$LD_LIBRARY_PATH"
-setenv MANPATH "/depot/global-5.9.7/share/man/:~/tools/screen/$UNAME/man:$MANPATH"
+# Current work directories
+alias cd9x478010 'cd /remote/qe105/stars/testcases/9000478010/yenliang/Star-RC_2011.06_NetlistDB_Abort/RC/star.head'
+# alias cd9x459351 
+
+# Xin merge for Intel berry farm
+if ( x$HOST == xredhathuge1 ) then
+    alias cd8x480813 'cd /berry/secure7/t0893/CASES/8000480813/star_rcxt/extract/rsuopc/XIN_MERGE.yenliang'
+    alias cd8x448152 'cd /berry/secure7/t0893/CASES/8000448152/aglad/ENG-7_dont_merge_via'
+endif
+
+# Samsung SDV (Secure Data Valt)
+alias sftp2sdv 'sftp kpsamsung@kp01-sftp.synopsys.com'
+# password: S2m$yNP1
