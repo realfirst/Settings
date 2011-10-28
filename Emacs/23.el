@@ -9,13 +9,12 @@
 (require 'color-theme)
 ;; (load-file (concat ELPA_HOME "/color-theme-twilight-0.1/color-theme-twilight.el"))
 (load-file (concat ELPA_HOME "/color-theme-actress-0.1.0/color-theme-actress.el"))
-;(color-theme-initialize)
 (set-variable 'color-theme-is-global nil)
 (message "Setting favorite color theme")
 ;; (add-hook 'after-make-window-system-frame-hooks 'color-theme-midlight)
-(add-hook 'after-make-window-system-frame-hooks 'color-theme-twilight)
+;(add-hook 'after-make-window-system-frame-hooks 'color-theme-twilight)
 ;; (add-hook 'after-make-window-system-frame-hooks 'color-theme-tangotango)
-(add-hook 'after-make-console-frame-hooks 'color-theme-tty-dark)
+;(add-hook 'after-make-console-frame-hooks 'color-theme-tty-dark)
 
 ;; --------------------------------------------------
 ;; Org-mode
@@ -26,10 +25,10 @@
       htmlize-html-charset "utf-8"
       htmlize-convert-nonascii-to-entities nil)
 
-(setq ORG_LISP_HOME (concat ELPA_HOME "/org-20111016"))
+(setq ORG_LISP_HOME (concat ELPA_HOME "/org-20111026"))
 
 ;; (add-to-list load-path (concat LISP_HOME "/remember"))
-;; (add-to-list 'load-path (concat ORG_LISP_HOME "/lisp"))
+(add-to-list 'load-path ORG_LISP_HOME)
 ;; (add-to-list 'load-path (concat ORG_LISP_HOME "/contrib/lisp"))
 ;; checklist
 ;; (load (concat ORG_LISP_HOME "/contrib/lisp/org-checklist.el"))

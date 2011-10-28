@@ -38,7 +38,7 @@ export ANDROID_SRC=/Volumes/Android
 export PATH=$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools:$ANDROID_NDK/bin:~/tools/screen/bin:$PATH
 
 function mount_android {
-    hdiutil attach ~/projects/android_master.dmg -mountpoint /Volumes/Android;
+    hdiutil attach ~/Work/Android/android_master.dmg -mountpoint /Volumes/Android;
     export ANDROID_PRODUCT_OUT=/Volumes/Android/out/target/product/generic
     export BUILD_SYSTEM=/Volumes/Android/build/core
     alias parse_stack='python ~/Dropbox/bin/stack.py --symbols-dir $ANDROID_PRODUCT_OUT/symbols'
