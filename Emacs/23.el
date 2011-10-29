@@ -53,3 +53,6 @@
 
 ;; tabbar
 (add-to-list 'load-path (concat ELPA_HOME "/tabbar-2.0.1"))
+
+;; perforce integration
+(add-to-list 'load-path (concat ELPA_HOME "/p4-11.0"))
