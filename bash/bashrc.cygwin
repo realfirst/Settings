@@ -16,15 +16,19 @@ fi
 # ##################################################
 # Android development
 # ##################################################
-export ANDROID_SDK=$HOME/tools/android-sdk-windows
-export ANDROID_SRC=$HOME/projects/android/master/
-export PATH=$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools:/cygdrive/c/Java/jdk1.6.0_27/bin:~/tools/apache-ant-1.8.2/bin:$PATH
+export ANDROID_SDK=~/tools/android-sdk-windows
+export JAVA_HOME=/cygdrive/c/Java/jdk1.6.0_27
+export ANT_HOME=~/tools/apache-ant-1.8.2
+export PATH=$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools:$JAVA_HOME/bin:$ANT_HOME/bin:$PATH
+
+# source code of android
+export ANDROID_SRC=$HOME/projects/android/master
 
 #
 export CYGWIN="tty"
 # Cygwin/Emacs has problems of getting the local timezone.
 export TZ=Asia/Taipei
-# export TERM=xterm-256color
+export TERM=xterm-256color
 
 # #########
 # Functions
@@ -40,6 +44,6 @@ alias cls='clearw'
 
 # mimic the open command in MacOSX.
 alias open='cygstart'
-# alias emacs='runemacs.exe'
 
+# custom build for screen that supports vertical split
 export PATH="~/tools/screen/bin:$PATH:."
