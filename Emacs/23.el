@@ -8,13 +8,13 @@
 (add-to-list 'load-path COLOR_THEME_LISP_HOME)
 (require 'color-theme)
 ;; (load-file (concat ELPA_HOME "/color-theme-twilight-0.1/color-theme-twilight.el"))
-(load-file (concat ELPA_HOME "/color-theme-actress-0.1.0/color-theme-actress.el"))
+;; (load-file (concat ELPA_HOME "/color-theme-actress-0.1.0/color-theme-actress.el"))
 (set-variable 'color-theme-is-global nil)
 (message "Setting favorite color theme")
-;; (add-hook 'after-make-window-system-frame-hooks 'color-theme-midlight)
-;(add-hook 'after-make-window-system-frame-hooks 'color-theme-twilight)
+;; (add-hook 'after-make-window-system-frame-hooks 'color-theme-midnight)
+;; (add-hook 'after-make-window-system-frame-hooks 'color-theme-twilight)
 ;; (add-hook 'after-make-window-system-frame-hooks 'color-theme-tangotango)
-;(add-hook 'after-make-console-frame-hooks 'color-theme-tty-dark)
+;; (add-hook 'after-make-console-frame-hooks 'color-theme-tty-dark)
 
 ;; --------------------------------------------------
 ;; Org-mode
@@ -56,3 +56,6 @@
 
 ;; perforce integration
 (add-to-list 'load-path (concat ELPA_HOME "/p4-11.0"))
+
+;; hideshow-vis
+(add-to-list 'load-path (concat ELPA_HOME "/hideshowvis-0.3"))
