@@ -43,7 +43,7 @@ set fignore=.o
 set nobeep
 
 # Don't let me log out by pressing <ctrl-d>
-set ignoreeof
+# set ignoreeof
 
 # Set TTY shell variable equal to the current terminal name
 set TTY=`who am i | awk '{print $2}'`
@@ -71,6 +71,10 @@ if ( $?EMACS ) then
 else
     set prompt = "%{[0;32m%}%S%m%s%{[0m%}: %~ > "
 endif
+if ( ! $?EMACS_SERVER_NAME ) then
+  setenv EMACS_SERVER_NAME server1
+endif
+setenv EDITOR "emacsclient -s $EMACS_SERVER_NAME -t -a ''"
 
 # ############################################################
 # Platform dependent settings.
@@ -137,7 +141,7 @@ setenv TARGET_ARCH $SNPSTYPE
 #2011.06:  rcxt_template_2011.06
 #2010.12:  rcxt_template_2010.12
 setenv P4PORT   p4p-`/usr/local/bin/siteid`:1777
-setenv P4EDITOR "emacsclient -t -a ''"
+setenv P4EDITOR "$EDITOR"
 setenv P4CONFIG .p4config
 setenv P4MERGE emerge
 setenv MERGE emerge
@@ -168,12 +172,9 @@ setenv XOBRANCH   1
 # SOURCE_ME
 setenv XOTESTHOME /remote/dept5242c/users/yenliang/src/xoTest/xoTest
 
-# if this shell is an interactive shell, make it dirty shell
-#if ( $?SSH_TTY ) then 
-    setenv TARGET_ARCH $SNPSTYPE
-    source ~/SOURCE_ME
-    setenv STARRC_OA_LIBS /remote/dept5242a/users/ylchen/code/head_new3/oareader/lib-${SNPSTYPE}:/global/libs/oa_qsce_2010.09_stlport4/${SNPSTYPE}/lib/opt:/depot/gcc-4.2.0/lib64
-#endif
+setenv TARGET_ARCH $SNPSTYPE
+source ~/SOURCE_ME
+setenv STARRC_OA_LIBS /remote/dept5242a/users/ylchen/code/head_new3/oareader/lib-${SNPSTYPE}:/global/libs/oa_qsce_2010.09_stlport4/${SNPSTYPE}/lib/opt:/depot/gcc-4.2.0/lib64
 
 ##### The following is to override the LICENSE setting in SOURCE_ME
 unsetenv SNPSLMD_LICENSE_FILE
@@ -213,6 +214,13 @@ set path = ( \
     $my_tools_path/ncurses-5.9/$SNPSTYPE/bin \
     $path )
 
+# dump Hercules CDB while parsing.
+alias dump_cdb 'setenv STARRC_DUMP_CDB_COMPOSITE 1; setenv DUMP_CDB 1; setenv COMPARE_CDB 1'
+
+# dump MW xtract view
+setenv ICV_HOME_DIR /remote/code/Hercules/icv_f2011.09_us02/ICV_HOME_DIR
+alias xtrdump $ICV_HOME_DIR/bin/$PPDTYPE/xtrdump
+
 # ##################################################
 # Aliases
 # ##################################################
@@ -227,31 +235,22 @@ alias used       'du -sh'
 alias myps       'ps -aux | grep ${USER}'
 alias rm         'rm -i'
 alias gr         'grep -n'
-alias ws         'screen -DR -mS'
-alias workspace  'screen -mS work -DR'
-alias et         'emacsclient -t -a '\'''\'''
-alias ec         'emacsclient -c -a '\'''\'''
+foreach f ( 1 2 3 4 5 )
+    set s=server$f
+    alias workspace$f "(echo 'setenv EMACS_SERVER_NAME $s'; cat ~/.screenrc) | tee /tmp/.screenrc.$s; screen -c /tmp/.screenrc.$s -mS $s -DR"
+end
+alias workspace_for_berry  'screen -mS berry -DR'
+alias et         "$EDITOR"
+# "emacsclient -s $EMACS_SERVER_NAME -t -a ''"
 alias synmake-g  'synmake BUILD_TYPE=pure exec-g'
 alias cgrep      "find . -type f -iregex '.*\.\(c\|C\|h\|ht\|cpp\)' -print0 | xargs -0 grep --color -n"
 alias hgrep      "find . -type f -iregex '.*\.\(h\|ht\)' -print0 | xargs -0 grep --color -n"
 alias mgrep      "find . -regextype posix-egrep -iregex '(.*\/Makefile|.*\/Makefile\..*|.*\.make|.*\.hier|.*\.mak|.*\.mk)' -type f -print0 | xargs -0 grep --color -n"
 alias sgrep      "find . -type f -iregex '.*\.\(c\|C\|h\|cpp\|S\|java\|xml\|sh\|hier\|make\)' -print0 | xargs -0 grep --color -n"
-alias fast       "/remote/srm226/sde/fast/test/0.1/bin/fast"
 
-
-# ##################################################
-# Aliases for projects I'm working on.
-# ##################################################
-# Current work directories
-alias cd9x478010 'cd /remote/qe105/stars/testcases/9000478010/yenliang/Star-RC_2011.06_NetlistDB_Abort/RC/star.head'
-# alias cd9x459351 
-
-# Xin merge for Intel berry farm
-if ( x$HOST == xredhathuge1 ) then
-    alias cd8x480813 'cd /berry/secure7/t0893/CASES/8000480813/star_rcxt/extract/rsuopc/XIN_MERGE.yenliang'
-    alias cd8x448152 'cd /berry/secure7/t0893/CASES/8000448152/aglad/ENG-7_dont_merge_via'
+set secure_settings=~/Settings/synopsys/cshrc.secure
+if ( -r $secure_settings ) then
+    echo "Loading secured settings....."
+    source $secure_settings
 endif
-
-# Samsung SDV (Secure Data Valt)
-alias sftp2sdv 'sftp kpsamsung@kp01-sftp.synopsys.com'
-# password: S2m$yNP1
+unset secure_settings

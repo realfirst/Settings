@@ -17,7 +17,7 @@ fi
 # Android development
 # ##################################################
 export ANDROID_SDK=~/tools/android-sdk-windows
-export JAVA_HOME=/cygdrive/c/Java/jdk1.6.0_27
+export JAVA_HOME=/cygdrive/c/Java/jdk1.6.0_29
 export ANT_HOME=~/tools/apache-ant-1.8.2
 export PATH=$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools:$JAVA_HOME/bin:$ANT_HOME/bin:$PATH
 

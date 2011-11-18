@@ -139,10 +139,19 @@ alias la='ls -A'
 alias l='ls -CF'
 alias gr='grep -n'
 alias cls='clear'
-alias et="emacsclient -t -a ''"
-alias ec="emacsclient -c -n -a ''"
-alias workspaces='screen -mS work -DR'
 alias scp='scp -Cr'
+
+# alias workspaces='screen -mS work -DR'
+if [ -z $EMACS_SERVER_NAME ]; then
+    export EMACS_SERVER_NAME server1
+fi
+# create aliases for screen workspace
+for w in {1..5}
+do
+    s="server$w"
+    alias workspace$w="(echo 'setenv EMACS_SERVER_NAME $s'; cat ~/.screenrc) | tee /tmp/.screenrc.$s; screen -c /tmp/.screenrc.$s -mS $s -DR"
+done
+alias et="emacsclient -t -s $EMACS_SERVER_NAME -a ''"
 
 # ##################################################
 # StarRC remote hosts
