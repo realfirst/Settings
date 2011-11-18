@@ -15,8 +15,8 @@
 (add-hook 'shell-mode-hook
           '(lambda ()
              (font-lock-mode t)
-             (buffer-face-mode t)
-             (buffer-face-set 'my-shell-small-face)
+             ;; (buffer-face-mode t)
+             ;; (buffer-face-set 'my-shell-small-face)
              (ansi-color-for-comint-mode-on)
              (local-set-key [home] ; move to the beginning of the line
                             'comint-bol)

@@ -18,7 +18,6 @@
  '(column-number-mode t)
  '(ecb-compile-window-width (quote edit-window))
  '(ecb-options-version "2.40")
- '(ispell-program-name "/usr/local/bin/aspell")
  '(jde-jdk-registry (quote (("1.6.0" . "/System/Library/Frameworks/JavaVM.framework/Versions/1.6.0"))))
  '(show-paren-mode t)
  '(tool-bar-mode nil))
@@ -32,14 +31,14 @@
 ;; ----------------------------------------------------------------------
 ;; Set English/Chinese font.
 ;; ----------------------------------------------------------------------
-(setq ns-antialias-text t)
+;; (setq ns-antialias-text nil)
 (when window-system
   (progn
     (set-default-font "-apple-Ubuntu_Mono-medium-normal-normal-*-14-*-*-*-m-0-iso10646-1")
-    ;; (set-default-font "-apple-Monaco-medium-r-normal--12-*-*-*-*-*-*-*")
+    ;; (set-default-font "-apple-Monaco-medium-r-normal--13-*-*-*-*-*-*-*")
     ;; (set-default-font "-apple-Menlo-medium-normal-normal-*-12-*-*-*-m-0-iso10646-1")
     ;; (set-default-font "-apple-Anonymous_Pro-medium-r-normal--14-*-*-*-m-*-*-*")
-    ;; (set-default-font "-apple-Lucida_Sans_Typewriter-medium-normal-normal-*-12-*-*-*-m-0-iso10646-1")
+    ;; (set-default-font "-apple-Lucida_Sans_Typewriter-medium-normal-normal-*-13-*-*-*-m-0-iso10646-1")
     ;; (set-default-font "-apple-Lucida_Console-medium-normal-normal-*-13-*-*-*-m-0-iso10646-1")
     ;; (set-default-font "-apple-Consolas-medium-normal-normal-*-14-*-*-*-*-*-*-*")
     ;; (set-default-font "-apple-Andale_Mono-medium-r-normal--12-90-72-72-m-90-mac-roman")
@@ -64,4 +63,46 @@
   (menu-bar-mode 1))
 
 ;; (remove-hook 'before-save-hook 'delete-trailing-whitespace)
-(global-set-key [home] 'beginning-of-line)
+
+;; --------------------------------------------------
+;; Different things between Aquamacs & Emacs
+;; --------------------------------------------------
+;; Define a variable to determine if I'm running Aquamacs
+(defvar aquamacs-p (string-match "Aquamacs" (version)))
+
+;; Override the [home] & [end] bindings
+(if (featurep 'aquamacs)
+  (progn
+    (define-key osx-key-mode-map (kbd "<home>") 'beginning-of-line)
+    (define-key osx-key-mode-map (kbd "<end>") 'end-of-line)
+
+    (setq ispell-program-name "/usr/local/bin/aspell")
+    )
+  (progn
+    (global-set-key [home] 'beginning-of-line)
+    (global-set-key [end] 'end-of-line)
+    ))
+
+(when (featurep 'aquamacs)
+    (progn
+      ;; Use the same font for all modes
+      (aquamacs-autoface-mode nil)
+
+      ;; restore classic Emacs selection behavior
+      (cua-mode 0)
+      (transient-mark-mode 1)
+
+      ;; Open buffers in the same frame
+      (one-buffer-one-frame-mode 0)
+
+      ;; Use 'open' command in Dired mode
+      (defun dired-open-mac ()
+        (interactive)
+        (let ((file-name (dired-get-file-for-visit)))
+          (if (file-exists-p file-name)
+              (call-process "/usr/bin/open" nil 0 nil file-name))))
+      ;; (define-key dired-mode-map "o" 'dired-open-mac)
+     ))
+
+
+
