@@ -2,7 +2,6 @@
 
 ;; (setenv "PATH" (concat (getenv "PATH")))
 ;; (setq exec-path (append exec-path '("/usr/local/bin" )))
-
 (setq use-org-mode t
       use-git-mode t
       use-jdee t
@@ -31,11 +30,11 @@
 ;; ----------------------------------------------------------------------
 ;; Set English/Chinese font.
 ;; ----------------------------------------------------------------------
-;; (setq ns-antialias-text nil)
+(setq ns-antialias-text t)
 (when window-system
   (progn
-    (set-default-font "-apple-Ubuntu_Mono-medium-normal-normal-*-14-*-*-*-m-0-iso10646-1")
-    ;; (set-default-font "-apple-Monaco-medium-r-normal--13-*-*-*-*-*-*-*")
+    (set-default-font "-apple-Ubuntu_Mono-medium-normal-normal-*-15-*-*-*-m-0-iso10646-1")
+    ;; (set-default-font "-apple-Monaco-medium-r-normal--15-*-*-*-*-*-*-*")
     ;; (set-default-font "-apple-Menlo-medium-normal-normal-*-12-*-*-*-m-0-iso10646-1")
     ;; (set-default-font "-apple-Anonymous_Pro-medium-r-normal--14-*-*-*-m-*-*-*")
     ;; (set-default-font "-apple-Lucida_Sans_Typewriter-medium-normal-normal-*-13-*-*-*-m-0-iso10646-1")
@@ -103,6 +102,3 @@
               (call-process "/usr/bin/open" nil 0 nil file-name))))
       ;; (define-key dired-mode-map "o" 'dired-open-mac)
      ))
-
-
-
