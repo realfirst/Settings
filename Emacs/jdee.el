@@ -16,9 +16,8 @@
   ;; From kde-c++-mode-hook
   ;; --------------------------------------------------
   (define-key java-mode-map "\C-m"  'c-context-line-break)
-  (when (or
-         (eq kde-tab-behavior 'default)
-         (eq kde-tab-behavior 'abbrev-indent))
+  (when (or (eq kde-tab-behavior 'default)
+            (eq kde-tab-behavior 'abbrev-indent))
     (define-key java-mode-map "\C-i" 'agulbra-c++-tab))
   (define-key java-mode-map "\ef" 'c-forward-into-nomenclature)
   (define-key java-mode-map "\eb" 'c-backward-into-nomenclature)
@@ -49,8 +48,9 @@
 ;;
 ;; (setq JDE_LISP_HOME (concat LISP_HOME "/jde/trunk/trunk/jdee/build"))
 (setq JDE_LISP_HOME (concat LISP_HOME "/jde/2.4.0.1"))
+;; (setq JDE_LISP_HOME (concat LISP_HOME "/jde/trunk"))
 
-;; (setq debug-on-error t)
+; (setq debug-on-error nil)
 (add-to-list 'load-path (concat JDE_LISP_HOME "/lisp"))
 (add-to-list 'load-path (concat LISP_HOME "/elib-1.0"))
 

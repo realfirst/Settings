@@ -396,26 +396,33 @@
     ;; (beginning-of-buffer)
     (unless (org-goto-local-search-headings today nil t)
       ((lambda ()
-         (org-insert-subheading 2)
+         ;; (org-insert-subheading 2)
+         (org-insert-heading 2)
          (insert today)
+         ;; insert a item '-' for user to get started journaling
          (insert "\n   - "))))))
 
 (defun org-journal-insert-month-heading ()
   "Create a new diary entry for today or append to an existing one."
   (interactive)
   (widen)
-  (let ((month (format-time-string "%Y/%m ")))
+  (let ((month (format-time-string "%Y/%m "))
+        (running "Running 11km"))
     ;; (beginning-of-buffer)
     (unless (org-goto-local-search-headings month nil t)
       ((lambda ()
          (org-insert-heading)
          (insert month)
          (insert (concat ":@" (format-time-string "%B") ":"))
-         (org-align-all-tags)
          (insert "\n")
+         ;; insert running todo
+         (org-insert-todo-subheading 2)
+         (insert (concat running " :Fitness:"))
+         (insert "\n")
+         (org-align-all-tags)
+         ;; insert first day journal heading
          (org-journal-insert-today-heading)
          )))))
-
 
 (setq org-agenda-diary-file (concat org-directory "/diary.org")) ;; change this
 

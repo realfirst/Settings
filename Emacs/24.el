@@ -1,7 +1,7 @@
 ;; ------------------------------------------------------------
 ;; Stuff that is specific to Emacs 24
 ;; ------------------------------------------------------------
-(message ">>>>> [Emacs24] Setting version specific stuff <<<<<")
+(message "===> loading settings for Emacs 24")
 
 ;; --------------------------------------------------
 ;; package sources
@@ -16,8 +16,13 @@
 ;; --------------------------------------------------
 ;; Color theme
 ;; --------------------------------------------------
-(add-hook 'after-make-window-system-frame-hooks
-          (lambda ()
-            ;; (load-theme 'tsdh-dark)))
-            ;; (load-theme 'tango-dark)))
-            (load-theme 'wombat)))
+;; (add-hook 'after-make-window-system-frame-hooks
+;;           (lambda ()
+;;             ;; (load-theme 'tsdh-dark)))
+;;             ;; (load-theme 'tango-dark)))
+;;             ;; (load-theme 'tsdh-dark)))
+;;             (load-theme 'manoj-dark)
+;;             ;; (load-theme 'wombat)
+;;             ;; (load-theme 'tango)
+;;             ;; (load-theme 'whiteboard)
+;;             ))
