@@ -195,7 +195,7 @@
         ("org-notes"
          :base-directory ,org-directory
          :base-extension "org"
-         :publishing-directory "~/public_html"
+         :publishing-directory "~/Dropbox/public_html"
          :recursive t
          :publishing-function org-publish-org-to-html
          :plain-source t
@@ -206,18 +206,20 @@
          :style "<link rel=\"stylesheet\" href=\"css/worg.css\" type=\"text/css\"/>"
          :auto-preamble t
          :auto-index t
+         :index-filename "sitemap.org"
+         :index-title "Sitemap"
          )
         ("org-ebooks"
          :base-directory ,org-directory
          :base-extension "pdf\\|chm"
-         :publishing-directory "~/public_html/"
+         :publishing-directory "~/Dropbox/public_html/"
          :recursive t
          :publishing-function org-publish-attachment
          )
         ("org-static"
          :base-directory ,org-directory
          :base-extension "css\\|js\\|png\\|jpg\\|gif\\|mp3\\|ogg\\|swf\\|mm"
-         :publishing-directory "~/public_html/"
+         :publishing-directory "~/Dropbox/public_html/"
          :recursive t
          :publishing-function org-publish-attachment
          )
@@ -454,3 +456,4 @@ org-mode."
         (message "Plain text written to %s" offline)))))
 (ad-activate 'org-agenda-add-entry-to-org-agenda-diary-file)
 
+;; (setq org-startup-indented t)

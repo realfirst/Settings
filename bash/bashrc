@@ -143,7 +143,7 @@ alias scp='scp -Cr'
 
 # alias workspaces='screen -mS work -DR'
 if [ -z $EMACS_SERVER_NAME ]; then
-    export EMACS_SERVER_NAME server1
+    export EMACS_SERVER_NAME=server1
 fi
 # create aliases for screen workspace
 for w in {1..5}
@@ -151,7 +151,15 @@ do
     s="server$w"
     alias workspace$w="(echo 'setenv EMACS_SERVER_NAME $s'; cat ~/.screenrc) | tee /tmp/.screenrc.$s; screen -c /tmp/.screenrc.$s -mS $s -DR"
 done
-alias et="emacsclient -t -s $EMACS_SERVER_NAME -a ''"
+export EDITOR="emacsclient -s $EMACS_SERVER_NAME -t -a ''"
+alias et="$EDITOR"
+alias kill-emacs="$EDITOR --eval '(kill-emacs)'"
+
+# create dvtm sessions
+for s in {1..5}
+do
+    alias dvtm$s="dtach -A /tmp/dvtm-session-${EMACS_SERVER_NAME}-$s dvtm"
+done
 
 # ##################################################
 # StarRC remote hosts
