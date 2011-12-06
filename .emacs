@@ -32,3 +32,16 @@
 (menu-bar-mode -1)
 
 ;; (remove-hook 'before-save-hook 'delete-trailing-whitespace)
+
+
+;; customize compile mode for StarRC
+;;     main.C  Master.hier  Master.make
+(add-hook 'c++-mode-hook
+          (lambda ()
+            ;; (unless (or (file-exists-p "main.C")
+            ;;             (file-exists-p "Master.hier")
+            ;;             (file-exists-p "Master.make"))
+            (set (make-local-variable 'compile-command)
+                 (concat "synmake -C " default-directory)
+                 )
+            ))
