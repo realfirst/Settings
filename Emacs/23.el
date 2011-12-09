@@ -28,12 +28,8 @@
 (add-to-list 'load-path (concat ORG_LISP_HOME "/contrib/lisp"))
 
 ;; checklist
-(require 'org-checklist)
+;; (require 'org-checklist)
 
-(require 'htmlize)
-(setq htmlize-output-type 'css
-      htmlize-html-charset "utf-8"
-      htmlize-convert-nonascii-to-entities nil)
 
 ;; ----------------------------------------------------------------------
 ;; Magit

@@ -159,7 +159,7 @@
 (setq org-default-notes-file (concat org-directory "/NOTE.org"))
 ;; (define-key global-map "\C-cr" 'org-remember)
 
-(require 'org-protocol)
+;; (require 'org-protocol)
 (setq org-capture-templates `(("t" "Todo" entry (file+headline (concat org-directory "/TASK.org") "Tasks") "* TODO %? %^g %u %i %a" :prepend t)
                               ("n" "Note" entry (file+headline (concat org-directory "/NOTE.org") "Notes") "* %^{Title}  %^g %? %u %i %a" :prepend t)
                               ("w" "org-protocol" entry (file (concat org-directory "/NOTE.org")) "* TODO Review %c  :NEXT: %U :PROPERTIES: :Effort: 0:10 :END:" :immediate-finish t)))
@@ -174,7 +174,8 @@
 (org-clock-persistence-insinuate)
 
 (setq org-agenda-files
-      (list org-directory)
+      (list org-directory               ;normal org files sync'd with Dropbox
+            "~/Org")                    ;files that are not supposed to be cloud sync'd
       )
 
 ;; Mark a TODO entry DONE automatically when all children are done
@@ -185,11 +186,15 @@
 (add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
 
 (require 'org-publish)
+(setq org-internal-directory "~/Org")
+(setq org-internal-publishing-directory (concat "/ssh:" user-login-name "@starrc01:~/public_html"))
 (setq org-publish-project-alist
       `(                                ;use back-quote
-        ("org"
-         :components ("org-notes" "org-static" "org-ebooks")
-         )
+        ;; publish to public cloud
+        ("org" :components ("org-notes" "org-static" "org-ebooks"))
+
+        ;; publish to internal cloud
+        ("org-internal" :components ("org-internal-notes" "org-internal-static"))
 
         ;; components
         ("org-notes"
@@ -209,6 +214,7 @@
          :index-filename "sitemap.org"
          :index-title "Sitemap"
          )
+
         ("org-ebooks"
          :base-directory ,org-directory
          :base-extension "pdf\\|chm"
@@ -216,6 +222,7 @@
          :recursive t
          :publishing-function org-publish-attachment
          )
+
         ("org-static"
          :base-directory ,org-directory
          :base-extension "css\\|js\\|png\\|jpg\\|gif\\|mp3\\|ogg\\|swf\\|mm"
@@ -223,8 +230,36 @@
          :recursive t
          :publishing-function org-publish-attachment
          )
-        )
-      )
+
+        ;; for everythings that should be kept away from public
+        ("org-internal-notes"
+         :base-directory ,org-internal-directory
+         :base-extension "org"
+         :publishing-directory ,org-internal-publishing-directory
+         :recursive t
+         :publishing-function org-publish-org-to-html
+         :headline-levels 10
+         :htmlized-source t
+         :section-numbers nil
+         :table-of-contents t
+         :style "<link rel=\"stylesheet\" href=\"css/worg.css\" type=\"text/css\"/>"
+         :auto-preamble t
+         :auto-index t
+         :auto-sitemap t
+         :sitemap-filename "index.html"
+         :sitemap-title "Homepage of Liu, Yen-Liang (David)"
+         :sitemap-style "tree"
+         :tags nil
+         )
+
+        ("org-internal-static"
+         :base-directory ,org-internal-directory
+         :publishing-directory ,org-internal-publishing-directory
+         :base-extension "css\\|js\\|png\\|jpg\\|gif\\|mp3\\|ogg\\|swf\\|mm"
+         :recursive t
+         :publishing-function org-publish-attachment
+         )
+        ))
 
 ;; tasks with dates are scheduled into the future sometime and you don't
 ;; need to deal with them until the date approaches
@@ -309,8 +344,8 @@
                   (800 1000 1200 1400 1600 1800 2000))))
 
 ;; w3m
-(require 'org-w3m)
-(require 'org-wl)
+;;(require 'org-w3m)
+;;(require 'org-wl)
 
 ;; invoice support
 (autoload 'org-invoice-report "org-invoice")
@@ -463,4 +498,24 @@ org-mode."
         (message "Plain text written to %s" offline)))))
 (ad-activate 'org-agenda-add-entry-to-org-agenda-diary-file)
 
-;; (setq org-startup-indented t)
+;; (setq org-startup-indented nil)
+
+;; Use htmlize. Be sure to check if it uses the latest version
+(require 'htmlize)
+(setq htmlize-output-type 'css
+      htmlize-html-charset "utf-8"
+      htmlize-convert-nonascii-to-entities nil)
+
+(setq org-infojs-options
+      '((path . "~/scripts/org-info.js")
+        (view . "info")
+        (view . "info")
+        (toc . :table-of-contents)
+        (ftoc . "0")
+        (tdepth . "max")
+        (sdepth . "max")
+        (mouse . "underline")
+        (buttons . "0")
+        (ltoc . "1")
+        (up . :link-up)
+        (home . :link-home)))
