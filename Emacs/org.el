@@ -205,7 +205,7 @@
          :htmlized-source t
          :section-numbers nil
          :table-of-contents t
-         :style "<link rel=\"stylesheet\" href=\"css/org-manual.css\" type=\"text/css\"/>"
+         :style "<link rel=\"stylesheet\" href=\"css/worg.css\" type=\"text/css\"/>"
          :auto-preamble t
          :auto-index t
          :index-filename "sitemap.org"
@@ -239,7 +239,7 @@
          :htmlized-source t
          :section-numbers nil
          :table-of-contents t
-         :style "<link rel=\"stylesheet\" href=\"css/org-manual.css\" type=\"text/css\"/>"
+         :style "<link rel=\"stylesheet\" href=\"css/worg.css\" type=\"text/css\"/>"
          :auto-preamble t
          :auto-index t
          :auto-sitemap t
