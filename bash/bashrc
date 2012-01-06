@@ -149,11 +149,13 @@ fi
 for w in {1..5}
 do
     s="server$w"
-    alias workspace$w="(echo 'setenv EMACS_SERVER_NAME $s'; cat ~/.screenrc) | tee /tmp/.screenrc.$s; screen -c /tmp/.screenrc.$s -mS $s -DR"
+    alias ws$w="(echo 'setenv EMACS_SERVER_NAME $s'; cat ~/.screenrc) | tee /tmp/.screenrc.$s; screen -c /tmp/.screenrc.$s -mS $s -DR"
 done
 export EDITOR="emacsclient -s $EMACS_SERVER_NAME -t -a ''"
 alias et="$EDITOR"
 alias kill-emacs="$EDITOR --eval '(kill-emacs)'"
+# in case (MacOS and Cygwin), emacs server can't be started by this way.
+alias start-emacs-server="emacs --daemon=$EMACS_SERVER_NAME"
 
 # create dvtm sessions
 for s in {1..5}

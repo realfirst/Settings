@@ -3,40 +3,33 @@
 ;; ------------------------------------------------------------
 
 ;; loading color-theme for non-Aquamacs
-(set-variable 'color-theme-is-global nil)
-(message "Setting favorite color theme")
 (unless (featurep 'aquamacs)
-  (progn                                ; non-aquamacs
-    (message ">>>>> [Emacs23] Loading color themes <<<<<")
-    (defconst COLOR_THEME_LISP_HOME (concat ELPA_HOME "/color-theme-6.6.1"))
+  (when window-system
+    (progn                                ; non-aquamacs
+      (message ">>>>> [Emacs23] Loading color themes <<<<<")
+      (set-variable 'color-theme-is-global nil)
+      (defconst COLOR_THEME_LISP_HOME (concat ELPA_HOME "/color-theme-6.6.1"))
 
-    (add-to-list 'load-path COLOR_THEME_LISP_HOME)
-    (require 'color-theme)
-    (load-file (concat ELPA_HOME "/color-theme-twilight-0.1/color-theme-twilight.el"))
-    ;; (load-file (concat ELPA_HOME "/color-theme-actress-0.1.0/color-theme-actress.el"))
-    (set-variable 'color-theme-is-global nil)
-    (message "Setting favorite color theme")
-    ;; (add-hook 'after-make-window-system-frame-hooks 'color-theme-midnight)
-    (add-hook 'after-make-window-system-frame-hooks 'color-theme-twilight)
-    ;; (add-hook 'after-make-window-system-frame-hooks 'color-theme-tangotango)
-    ;; (add-hook 'after-make-console-frame-hooks 'color-theme-tty-dark)
-    ))
+      (add-to-list 'load-path COLOR_THEME_LISP_HOME)
+      (require 'color-theme)
+      (load-file (concat ELPA_HOME "/color-theme-twilight-0.1/color-theme-twilight.el"))
+      ;; (load-file (concat ELPA_HOME "/color-theme-actress-0.1.0/color-theme-actress.el"))
+      (set-variable 'color-theme-is-global nil)
+      (message "Setting favorite color theme")
+      ;; (add-hook 'after-make-window-system-frame-hooks 'color-theme-midnight)
+      ;; (add-hook 'after-make-window-system-frame-hooks 'color-theme-twilight)
+      ;; (add-hook 'after-make-window-system-frame-hooks 'color-theme-tangotango)
+      ;; (add-hook 'after-make-console-frame-hooks 'color-theme-tty-dark)
+      )))
 
 ;; --------------------------------------------------
 ;; Org-mode
 ;; --------------------------------------------------
 ;; (message ">>>>> [Emacs23] Setting load-path for org-mode <<<<<")
-;; (setq ORG_LISP_HOME (concat ELPA_HOME "/org-20111026"))
 (setq ORG_LISP_HOME (concat LISP_HOME "/org/org-7.8.02"))
-;; (setq ORG_LISP_HOME (concat LISP_HOME "/org/org-7.7"))
 
-;; (add-to-list load-path (concat LISP_HOME "/remember"))
 (add-to-list 'load-path (concat ORG_LISP_HOME "/lisp"))
 (add-to-list 'load-path (concat ORG_LISP_HOME "/contrib/lisp"))
-
-;; checklist
-;; (require 'org-checklist)
-
 
 ;; ----------------------------------------------------------------------
 ;; Magit
