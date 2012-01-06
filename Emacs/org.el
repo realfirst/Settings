@@ -55,100 +55,97 @@
 (setq org-tag-persistent-alist
       '(("Task" . nil)
         ("Note" . nil)
+
         ;; Study group
         ("Study" . nil)
         (:startgroup . nil)
-        ("Book" . nil)
-        ("Paper" . nil)
-        ("Manual" . nil)
+        ("book" . nil)
+        ("paper" . nil)
+        ("manual" . nil)
         (:endgroup . nil)
+
         ;; Location
         ("@India" . nil)
         ("@Taipei" . nil)
         ("@China" . nil)
         ("@Hualien" . nil)
-        ("@Alchip" . nil)
-        ("@Altek" . nil)
-        ("@Synopsys" . nil)
         ("@TPML" . nil)
+
+        ;; Work
+        ("Company" . nil)
+        (:startgroup . nil)
+        ("@alchip" . nil)
+        ("@altek" . nil)
+        ("@synopsys" . nil)
+        (:endgroup . nil)
+
         ;; Operating systems
         ("Ubuntu" . nil)
         ("Windows" . nil)
         ("MacOSX" . nil)
         ("Unix" . nil)
+        ("Android" . nil)
+        ("iOS" . nil)
+
         ;; EDA/VLSI Topics
         ("EDA" . nil)
-        ("VLSI" . nil)
-        ("Extraction" . nil)
-        ("DummyMetalFill" . nil)
-        ("3DIC" . nil)
-        ;; Android
-        ("Android" . nil)
-        ("iPhone" . nil)
+
         ;; Emacs
         ("Emacs" . nil)
         (:startgroup . nil)
-        ("OrgMode" . nil)
+        ("org-mode" . nil)
         (:endgroup . nil)
 
         ;; Emacs
         ("Shell" . nil)
         (:startgroup . nil)
-        ("Bash" . nil)
-        ("Tcsh" . nil)
+        ("bash" . nil)
+        ("tcsh" . nil)
         (:endgroup . nil)
 
-        ;; Programming
-        ("Programming" . nil)
+        ("Software" . nil)
         (:startgroup . nil)
-        ("Java" . nil)
-        ("Cpp" . nil)
-        ("Tcl" . nil)
-        ("Python" . nil)
-        ("Ruby" . nil)
-        ("Skill" . nil)
+
+        ;; programming language
+        ("java" . nil)
+        ("cpp" . nil)
+        ("tcl" . nil)
+
+        ("synmake" . nil)
+        ("gnumake" . nil)
+        ("cmake" . nil)
+        ("parser" . nil)
+        ("designpattern" . nil)
+        ("ui" . nil)
+        ("font" . nil)
+        ("guideline" . nil)
+        ("qt" . nil)
+        ("performance" . nil)
+        ("test" . nil)
+        ("debug" . nil)
+        ("network" . nil)
+
+        ;; SCM
+        ("cvs" . nil)
+        ("git" . nil)
+        ("subversion" . nil)
+        ("perforce" . nil)
         (:endgroup . nil)
-        (:startgroup . nil)
-        ("Synmake" . nil)
-        ("GnuMake" . nil)
-        ("CMake" . nil)
-        (:endgroup . nil)
-        ("LexYacc" . nil)
-        ("DesignPattern" . nil)
-        ("UI" . nil)
-        ("Font" . nil)
-        ("Guideline" . nil)
-        (:startgroup . nil)
-        ("Qt" . nil)
-        ("Gtk" . nil)
-        (:endgroup . nil)
-        ("Performance" . nil)
-        ("Test" . nil)
-        ("Debug" . nil)
-        ("Network" . nil)
-        ;;
-        ("SCM" . nil)
-        (:startgroup . nil)
-        ("CVS" . nil)
-        ("Git" . nil)
-        ("Subversion" . nil)
-        ("P4" . nil)
-        (:endgroup . nil)
+
         ("Bug" . nil)
         ("Enhancement" . nil)
+
         ("Presentation" . nil)
+
         ;;
         ("Personal" . nil)
         ("Shopping" . nil)
         ("Project" . nil)
+
         ;;
         ("Quote" . nil)
         ("Career" . nil)
         ("Health" . nil)
-        ("Google" . nil)
-        ("Microsoft" . nil)
-        ("HTC" . nil)
-        ("Nokia" . nil)
         ("Exhibition" . nil)
         ("Meeting" . nil)
         ("Conference" . nil)
@@ -431,8 +428,8 @@
     ;; (beginning-of-buffer)
     (unless (org-goto-local-search-headings today nil t)
       ((lambda ()
-         ;; (org-insert-subheading 2)
-         (org-insert-heading 2)
+         (org-insert-subheading 2)
+         ;; (org-insert-heading 2)
          (insert today)
          ;; insert a item '-' for user to get started journaling
          (insert "\n   - "))))))

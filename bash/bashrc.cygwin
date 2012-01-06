@@ -46,4 +46,4 @@ alias cls='clearw'
 alias open='cygstart'
 
 # custom build for screen that supports vertical split
-export PATH="~/tools/screen/bin:~/tools/emacs-24.0.91/bin:$PATH:."
+export PATH="~/tools/screen/bin:~/tools/emacs-23.3/bin:$PATH:."
