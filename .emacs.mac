@@ -34,11 +34,13 @@
   (progn
     ;; (set-default-font "-apple-Ubuntu_Mono-medium-normal-normal-*-14-*-*-*-m-0-iso10646-1")
     (set-default-font "-apple-Lucida_Sans_Typewriter-medium-normal-normal-*-13-*-*-*-m-0-iso10646-1")
+    ;; (set-default-font "-apple-Lucida_Console-medium-normal-normal-*-13-*-*-*-m-0-iso10646-1")
+    ;; (set-default-font "-apple-Anonymous_Pro-medium-normal-normal-*-13-*-*-*-m-0-iso10646-1")
     ;; (set-default-font "-apple-Monaco-medium-r-normal--12-*-*-*-*-*-*-*")
     ;; (set-default-font "-apple-Menlo-medium-normal-normal-*-12-*-*-*-m-0-iso10646-1")
 
     ;; Set chinese font.
-    (if ns-antialias-text
+    (unless ns-antialias-text
         (set-fontset-font (frame-parameter nil 'font)
                           'han '("MingLan" . "unicode-bmp"))
       (set-fontset-font (frame-parameter nil 'font)
@@ -54,8 +56,8 @@
 ;;       line-move-visual t
 ;;       locate-command 'mdfind)
 
-;; (when window-system
-;;   (menu-bar-mode 1))
+(when window-system
+  (menu-bar-mode 1))
 
 ;; (remove-hook 'before-save-hook 'delete-trailing-whitespace)
 
