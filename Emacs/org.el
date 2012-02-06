@@ -376,7 +376,8 @@
 (setq org-file-apps
       `((auto-mode . emacs) ("\\.*\\'" . ,org-attach-open)))
 
-;;
+;; fontify source block
+(setq org-src-fontify-natively t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;_+ Babel
@@ -438,18 +439,13 @@
   "Create a new diary entry for today or append to an existing one."
   (interactive)
   (widen)
-  (let ((month (format-time-string "%Y/%m "))
-        (running "Running 11km"))
+  (let ((month (format-time-string "%Y/%m ")))
     ;; (beginning-of-buffer)
     (unless (org-goto-local-search-headings month nil t)
       ((lambda ()
          (org-insert-heading)
          (insert month)
          (insert (concat ":@" (format-time-string "%B") ":"))
-         (insert "\n")
-         ;; insert running todo
-         (org-insert-todo-subheading 2)
-         (insert (concat running " :Fitness:"))
          (insert "\n")
          (org-align-all-tags)
          ;; insert first day journal heading
