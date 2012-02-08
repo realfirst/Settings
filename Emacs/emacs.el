@@ -476,6 +476,8 @@
     (setq default-frame-alist
           '((vertical-scroll-bars)
             (alpha 95 90)                   ;transparency
+            (left-fringe . 2)
+            (right-fringe . 2)
             ))
 
     ;; --------------------------------------------------
