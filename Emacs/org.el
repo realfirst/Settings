@@ -184,14 +184,12 @@
 
 (require 'org-publish)
 (setq org-internal-directory "~/Org")
+(setq org-internal-static-directory "~/Org/images")
 (setq org-internal-publishing-directory (concat "/ssh:" user-login-name "@starrc01:~/public_html"))
 (setq org-publish-project-alist
       `(                                ;use back-quote
         ;; publish to public cloud
         ("org" :components ("org-notes" "org-static" "org-ebooks"))
-
-        ;; publish to internal cloud
-        ("org-internal" :components ("org-internal-notes" "org-internal-static"))
 
         ;; components
         ("org-notes"
@@ -210,6 +208,11 @@
          :auto-index t
          :index-filename "sitemap.org"
          :index-title "Sitemap"
+         :sitemap-filename "index.html"
+         :sitemap-title "Homepage of Liu, Yen-Liang (David)"
+         :sitemap-style "tree"
+         :sitemap-sort-folders "first"
+         :sitemap-sort-files "anti-chronologically"
          )
 
         ("org-ebooks"
@@ -227,6 +230,9 @@
          :recursive t
          :publishing-function org-publish-attachment
          )
+
+        ;; publish to internal cloud
+        ("org-internal" :components ("org-internal-notes" "org-internal-static"))
 
         ;; for everythings that should be kept away from public
         ("org-internal-notes"
@@ -246,11 +252,13 @@
          :sitemap-filename "index.html"
          :sitemap-title "Homepage of Liu, Yen-Liang (David)"
          :sitemap-style "tree"
+         :sitemap-sort-folders "first"
+         :sitemap-sort-files "anti-chronologically"
          :tags nil
          )
 
         ("org-internal-static"
-         :base-directory ,org-internal-directory
+         :base-directory ,org-internal-static-directory
          :publishing-directory ,org-internal-publishing-directory
          :base-extension "css\\|js\\|png\\|jpg\\|gif\\|mp3\\|ogg\\|swf\\|mm"
          :recursive t
