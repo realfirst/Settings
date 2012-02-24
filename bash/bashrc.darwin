@@ -59,3 +59,11 @@ alias tar='gtar'
 #    defaults write $HOME/.MacOSX/environment PATH "$PATH"
 #fi
 #defaults write org.gnu.Emacs Emacs.font "-apple-Lucida_Sans_Typewriter-medium-normal-normal-*-13-*-*-*-m-0-iso10646-1"
+
+# ##################################################
+# Colors at command line
+# ##################################################
+export CLICOLOR=1
+
+export LSCOLORS=GxFxCxDxBxegedabagaced # for dark
+export LSCOLORS=ExFxBxDxCxegedabagacad # for light
