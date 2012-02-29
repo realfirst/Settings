@@ -1,0 +1,10 @@
+#!/bin/csh -f
+
+set workspace_name = $1
+if ( $workspace_name == "" ) then
+    set workspace_name = $DEFAULT_EMACS_SERVER_NAME
+endif
+
+setenv EMACS_SERVER_NAME $workspace_name
+setenv SCREEN true
+screen -mS ${workspace_name} -DR
