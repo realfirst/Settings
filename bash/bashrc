@@ -134,23 +134,25 @@ if [ -f ~/.bash_aliases ]; then
    . ~/.bash_aliases
 fi
 
-alias ll='ls -l'
+alias ll='ls --color=always -l'
 alias la='ls -A'
 alias l='ls -CF'
 alias gr='grep -n'
 alias cls='clear'
 alias scp='scp -Cr'
 
-# alias workspaces='screen -mS work -DR'
+DEFAULT_EMACS_SERVER_NAME=5
 if [ -z $EMACS_SERVER_NAME ]; then
-    export EMACS_SERVER_NAME=server1
+    EMACS_SERVER_NAME=$DEFAULT_EMACS_SERVER_NAME
 fi
-# create aliases for screen workspace
-for w in {1..5}
-do
-    s="server$w"
-    alias ws$w="(echo 'setenv EMACS_SERVER_NAME $s'; cat ~/.screenrc) | tee /tmp/.screenrc.$s; screen -c /tmp/.screenrc.$s -mS $s -DR"
-done
+
+if [ -z $SCREEN ]; then
+    # Don't create ws aliases if already in workspace
+    for w in 1 2 3 4 $DEFAULT_EMACS_SERVER_NAME
+    do
+        alias ws$w="~/bin/workspace $w"
+    done
+fi
 export EDITOR="emacsclient -s $EMACS_SERVER_NAME -t -a ''"
 alias et="$EDITOR"
 alias kill-emacs="$EDITOR --eval '(kill-emacs)'"
@@ -162,27 +164,6 @@ for s in {1..5}
 do
     alias dvtm$s="dtach -A /tmp/dvtm-session-${EMACS_SERVER_NAME}-$s dvtm"
 done
-
-# ##################################################
-# StarRC remote hosts
-# ##################################################
-# Citrix server
-alias ssh2rc01='ssh starrc01'
-
-# starrc01-starrc03
-alias ssh2rc01='ssh starrc01'
-alias ssh2rc02='ssh starrc02'
-alias ssh2rc03='ssh starrc03'
-
-# stxtopt04, stxtopt05, stxtopt06, stxtopt07, stxtopt08, stxtopt09, stxtopt10, stxtopt11
-alias ssh2opt04='ssh stxtopt04'
-alias ssh2opt05='ssh stxtopt05'
-alias ssh2opt06='ssh stxtopt06'
-alias ssh2opt07='ssh stxtopt07'
-alias ssh2opt08='ssh stxtopt08'
-alias ssh2opt09='ssh stxtopt09'
-alias ssh2opt10='ssh stxtopt10'
-alias ssh2opt11='ssh stxtopt11'
 
 alias cgrep="find . -type f -iregex '.*\.\(c\|C\|h\|ht\|cpp\)' -print0 | xargs -0 grep --color -n"
 alias hgrep="find . -type f -iregex '.*\.\(h\|ht\)' -print0 | xargs -0 grep --color -n"

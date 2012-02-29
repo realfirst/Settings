@@ -9,9 +9,11 @@
 # ################################################
 export PATH=/usr/local/bin:$PATH
 
-if [ -f /usr/local/Cellar/coreutils/8.12/aliases ]; then
-    . /usr/local/Cellar/coreutils/8.12/aliases
+COREUTILS_ALIAS_FILE=/usr/local/Cellar/coreutils/8.15/aliases
+if [ -f $COREUTILS_ALIAS_FILE ]; then
+    . $COREUTILS_ALIAS_FILE
 fi
+alias ls='gls'
 
 export EDITOR="vim"
 

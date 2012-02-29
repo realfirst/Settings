@@ -20,6 +20,7 @@
       ;; (add-hook 'after-make-window-system-frame-hooks 'color-theme-twilight)
       ;; (add-hook 'after-make-window-system-frame-hooks 'color-theme-tangotango)
       ;; (add-hook 'after-make-console-frame-hooks 'color-theme-tty-dark)
+      (load-file (concat LISP_HOME "/color-theme-tomorrow.el"))
       )))
 
 ;; --------------------------------------------------
